@@ -1,50 +1,43 @@
-<mat-toolbar class="mat-elevation-z8">
-    <app-topbar></app-topbar>   
-    <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
-        <mat-icon *ngIf="!sidenav.opened">
-            menu
-        </mat-icon>
-        <mat-icon *ngIf="sidenav.opened">
-            close
-        </mat-icon>
-    </button>
-    Responsive side navigation
-</mat-toolbar>
 
-<mat-sidenav-container>
-    <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
 
-        <img class="avatar mat-elevation-z8" src="https://source.unsplash.com/c_GmwfHBDzk/200x200" />
+<nz-layout class="app-layout">
 
-        <h4 class="name">John Smith</h4>
-        <p class="designation">Software Engineer</p>
+  <nz-sider class="menu-sidebar"
+    nzCollapsible
+    nzWidth="256px"
+    nzBreakpoint="md"
+    [(nzCollapsed)]="isSidebarClosed"
+    [nzTrigger]="null">
 
-        <mat-divider></mat-divider>
+    <app-sidebar-page [isSidebarClosed] = "isSidebarClosed"></app-sidebar-page>
+  </nz-sider>
 
-        <button mat-button class="menu-button">
-            <mat-icon>home</mat-icon>
-            <span>Home</span>
-        </button>
-        <button mat-button class="menu-button">
-            <mat-icon>person</mat-icon>
-            <span>Profile</span>
-        </button>
-        <button mat-button class="menu-button">
-            <mat-icon>info</mat-icon>
-            <span>About</span>
-        </button>
 
-        <mat-divider></mat-divider>
 
-        <button mat-button class="menu-button">
-            <mat-icon>help</mat-icon>
-            <span>Help</span>
-        </button>
+  <nz-layout>
+    <nz-header>
+      <app-header (sidebarControl)="ReceivedMessage($event)"></app-header>
+    </nz-header>
 
-    </mat-sidenav>
-    <mat-sidenav-content>
-        <div class="content mat-elevation-z8">
-            Main content here!
-        </div>
-    </mat-sidenav-content>
-</mat-sidenav-container>
+
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+        {{isSidebarClosed}}
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>
+
+
+
+
+<div class="app-header">
+  <span class="header-trigger" (click)="ControlSidebar()">
+      <i class="trigger"
+         nz-icon
+         [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+      ></i>
+  </span>
+  <button class="button">test</button>
+</div>

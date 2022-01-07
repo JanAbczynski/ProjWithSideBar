@@ -1,29 +1,40 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { pl_PL } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import pl from '@angular/common/locales/pl';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatDividerModule } from '@angular/material/divider';
-import { TopbarComponent } from './topbar/topbar.component';
+import { AppRoutingModule } from './app-routing.module';
+import { IconsProviderModule } from './icons-provider.module';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { SidebarPageComponent } from './components/sidebar-page/sidebar-page.component';
+import {HeaderComponent} from './components/header/header.component'
+
+registerLocaleData(pl);
 
 @NgModule({
-  declarations: [AppComponent, TopbarComponent],
+  declarations: [
+    AppComponent,
+    SidebarPageComponent,
+    HeaderComponent
+  ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
     BrowserAnimationsModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDividerModule,
+    AppRoutingModule,
+    IconsProviderModule,
+    NzLayoutModule,
+    NzMenuModule
   ],
-  providers: [],
-  bootstrap: [AppComponent],
+  providers: [{ provide: NZ_I18N, useValue: pl_PL }],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
