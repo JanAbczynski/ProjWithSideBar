@@ -23,21 +23,15 @@
     <nz-content>
       <div class="inner-content">
         <router-outlet></router-outlet>
-        {{isSidebarClosed}}
+
+
+
+
+
+
       </div>
     </nz-content>
   </nz-layout>
 </nz-layout>
 
 
-
-
-<div class="app-header">
-  <span class="header-trigger" (click)="ControlSidebar()">
-      <i class="trigger"
-         nz-icon
-         [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-      ></i>
-  </span>
-  <button class="button">test</button>
-</div>
