@@ -15,6 +15,7 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { SidebarPageComponent } from './components/sidebar-page/sidebar-page.component';
 import {HeaderComponent} from './components/header/header.component'
+import { MaterialModule } from './material/material.module';
 
 registerLocaleData(pl);
 
@@ -32,7 +33,8 @@ registerLocaleData(pl);
     AppRoutingModule,
     IconsProviderModule,
     NzLayoutModule,
-    NzMenuModule
+    NzMenuModule,
+    MaterialModule
   ],
   providers: [{ provide: NZ_I18N, useValue: pl_PL }],
   bootstrap: [AppComponent]
