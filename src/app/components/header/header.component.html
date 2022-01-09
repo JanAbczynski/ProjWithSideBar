@@ -1,31 +1,29 @@
 <nz-header>
-    <div class="app-header">
-      <div  class="col-md-6">
-        
-      <span class="header-trigger" (click)="SidebarControl()">
-          <i class="trigger"
-             nz-icon
-             [nzType]="isSidebarClosed ? 'menu-unfold' : 'menu-fold'"
-          ></i>
-      </span>
-      
-      </div>
-      <div  class="col-md-6">
-        aaaa
-
-
-        <!-- <form >       
-          <mat-form-field appearance="fill" >
-            <mat-label>Login</mat-label>
-            <input matInput required><br>
-          </mat-form-field>
+    <div class="app-header" >
+      <div fxLayout="row" >
+        <div  fxFlex="5">
           
-          <mat-form-field appearance="fill">
-            <mat-label>Hasło</mat-label>
-            <input matInput required><br>
-          </mat-form-field>
-        </form> -->
+          <span class="header-trigger" (click)="SidebarControl()">
+              <i class="trigger"
+                nz-icon
+                [nzType]="isSidebarClosed ? 'menu-unfold' : 'menu-fold'"
+              ></i>
+          </span>
+          
+
+        </div>
+        <div fxFlex="15">  
+          <mat-spinner [diameter]="60" ></mat-spinner>
+        </div>
+        <div  fxFlex="75" fxLayoutAlign="end"> 
+
+
+          <div>
+            <mat-icon (click)="OpenDialog()">login</mat-icon>
+          </div>
+        </div>
       </div>
+
 
 
     </div>

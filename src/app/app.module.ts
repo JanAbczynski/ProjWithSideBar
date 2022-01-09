@@ -16,6 +16,8 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { SidebarPageComponent } from './components/sidebar-page/sidebar-page.component';
 import {HeaderComponent} from './components/header/header.component'
 import { MaterialModule } from './material/material.module';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
 
 registerLocaleData(pl);
 
@@ -23,8 +25,10 @@ registerLocaleData(pl);
   declarations: [
     AppComponent,
     SidebarPageComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoginDialogComponent
   ],
+  entryComponents: [LoginDialogComponent],
   imports: [
     BrowserModule,
     FormsModule,
@@ -34,7 +38,8 @@ registerLocaleData(pl);
     IconsProviderModule,
     NzLayoutModule,
     NzMenuModule,
-    MaterialModule
+    MaterialModule,
+    FlexLayoutModule
   ],
   providers: [{ provide: NZ_I18N, useValue: pl_PL }],
   bootstrap: [AppComponent]
