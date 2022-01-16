@@ -19,6 +19,8 @@ import { MaterialModule } from './material/material.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
 
+import { ToastrModule } from 'ngx-toastr';
+
 registerLocaleData(pl);
 
 @NgModule({
@@ -26,7 +28,7 @@ registerLocaleData(pl);
     AppComponent,
     SidebarPageComponent,
     HeaderComponent,
-    LoginDialogComponent
+    LoginDialogComponent,
   ],
   entryComponents: [LoginDialogComponent],
   imports: [
@@ -39,7 +41,8 @@ registerLocaleData(pl);
     NzLayoutModule,
     NzMenuModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ToastrModule.forRoot()
   ],
   providers: [{ provide: NZ_I18N, useValue: pl_PL }],
   bootstrap: [AppComponent]

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { RegisterLoginService } from 'src/app/services/register-login.service';
+import { CommonServiceService as CommonService } from 'src/app/services/common-service.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-login-dialog',
@@ -10,7 +12,9 @@ import { RegisterLoginService } from 'src/app/services/register-login.service';
 export class LoginDialogComponent implements OnInit {
 
   constructor(
-    private registerLoginService : RegisterLoginService
+    private registerLoginService : RegisterLoginService,
+    private commonService: CommonService,
+    private dialogRef: MatDialogRef<LoginDialogComponent>
   ) { }
 
   userModel = new User('','');
@@ -36,8 +40,8 @@ export class LoginDialogComponent implements OnInit {
       },
       (error: Response) => {
           let errorMessage = JSON.parse(JSON.stringify(error)).error;
-          console.log("errorMessage")
-          console.log(errorMessage)
+          this.commonService.ShowError('message', 'title');
+          this.dialogRef.close();
       }
     )
   }
@@ -46,5 +50,6 @@ export class LoginDialogComponent implements OnInit {
   TabChange(){
     this.userModel = new User('','');
   }
+
 
 }

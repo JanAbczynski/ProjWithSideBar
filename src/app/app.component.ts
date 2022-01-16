@@ -1,4 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { CommonServiceService as CommonService } from './services/common-service.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +13,10 @@ export class AppComponent {
   isSidebarClosed: boolean =true;
   @Output() messageEvent = new EventEmitter<string>();
 
-
+  constructor(
+    private toastr: ToastrService,
+    private commonService: CommonService
+    ){}
 
   ControlSidebar(){
     this.isSidebarClosed = !this.isSidebarClosed;
@@ -22,4 +27,9 @@ export class AppComponent {
     console.log("received")
     this.isSidebarClosed = $event
   }
+
+  Show(){
+    this.commonService.ShowInfo('message', 'title');
+    };
+  
 }

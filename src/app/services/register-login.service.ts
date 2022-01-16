@@ -8,7 +8,7 @@ import { User } from '../models/user';
 })
 export class RegisterLoginService {
 
-  url = environment.apiUrl + "/login";
+  url = environment.apiUrl + "/User";
   constructor(
     private http: HttpClient
   ) { }
