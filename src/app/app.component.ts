@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CommonServiceService as CommonService } from './services/common-service.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',

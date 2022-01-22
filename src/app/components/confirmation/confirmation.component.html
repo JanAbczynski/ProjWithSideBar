@@ -1,0 +1,12 @@
+<div>
+    Została dokonana dogłębna analiza przesłanego kodu. <br>
+    <div *ngIf="errorMessage != null">
+       Niestety wyniki nie są zbyt optymistyczne.<br>
+    {{errorMessage}}     
+    </div>
+    <div *ngIf="correctMessage != null">
+       Cały proces przebiegł pomyślnie<br>
+    {{correctMessage}}     
+    </div>
+
+</div>

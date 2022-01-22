@@ -9,7 +9,7 @@ import pl from '@angular/common/locales/pl';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule, ArrayOfComponents  } from './app-routing.module';
 import { IconsProviderModule } from './icons-provider.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
@@ -18,8 +18,10 @@ import {HeaderComponent} from './components/header/header.component'
 import { MaterialModule } from './material/material.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
+import { CommonModule } from '@angular/common';
 
 import { ToastrModule } from 'ngx-toastr';
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 
 registerLocaleData(pl);
 
@@ -29,14 +31,18 @@ registerLocaleData(pl);
     SidebarPageComponent,
     HeaderComponent,
     LoginDialogComponent,
+    ConfirmationComponent,
+    ArrayOfComponents
   ],
   entryComponents: [LoginDialogComponent],
   imports: [
+    CommonModule,
     BrowserModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    BrowserModule,
     IconsProviderModule,
     NzLayoutModule,
     NzMenuModule,

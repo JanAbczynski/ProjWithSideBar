@@ -17,4 +17,9 @@ export class RegisterLoginService {
     console.log("register works");
     return this.http.post<User>(this.url + "/RegisterNewUser", user);
   }
+
+  public Login (user: User){
+    console.log("login");
+    return this.http.post<User>(this.url + "/Login", user);
+  }
 }
