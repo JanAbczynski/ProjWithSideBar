@@ -1,6 +1,11 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import { LoginDialogComponent } from 'src/app/components/login-dialog/login-dialog.component';
+import { CommonServiceService } from '../../services/common-service.service';
+import { LoginService } from '../../services/login.service';
+// import { LoginDialogComponent } from 'src/app/components/login-dialog/login-dialog.component';
+import { NotifierService } from '../../services/notifier.service';
+import { LoginDialogComponent } from '../login-dialog/login-dialog.component'
+import { LoaderService } from "../../services/loader.service"
 
 @Component({
   selector: 'app-header',
@@ -8,16 +13,38 @@ import { LoginDialogComponent } from 'src/app/components/login-dialog/login-dial
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  constructor(public dialog: MatDialog){
+  constructor(
+    public dialog: MatDialog,
+    private notifierService: NotifierService,
+    private loginService: LoginService,
+    private commonService: CommonServiceService,
+    private loaderService: LoaderService
+    ){
 
   }
 
+  subscription: any;
   isCollapsed = false;
+  isLogged = false;
+  loaderStatus = false;
+
 
   isSidebarClosed: boolean = false;
   @Output() sidebarControl = new EventEmitter<boolean>();
 
   ngOnInit(): void {
+    // this.loaderStatus = this.loaderService.GetStatus();
+    this.subscription = this.loaderService.GetStatus()
+    .subscribe(item => this.SetLoad(item))
+  }
+
+  SetLoad(loaderStatus: any){
+    this.loaderStatus = loaderStatus
+  }
+
+  GetLoader(){
+    this.loaderStatus = !this.loaderStatus;
+    console.log(this.loaderStatus )
   }
 
   SidebarControl(){
@@ -43,6 +70,25 @@ export class HeaderComponent implements OnInit {
     dialogBox.afterClosed().subscribe(result =>{
       console.log(`${result}`);
     })
+  }
+
+
+  LogOut(){
+    this.loginService.logout();
+    this.commonService.ShowSuccess("Zostałeś wylogowany", "");
+    this.notifierService.showNotification("Zostałeś wylogowany", "");
+  }
+
+  noti(){
+    console.log(this.loginService.GetTokenInfo()['email']);
+  }
+
+  GetUserEmail(){
+    return this.loginService.GetTokenInfo()['email'];
+  }
+
+  IsLogged(){
+    return this.loginService.isLogged();
   }
 
 }

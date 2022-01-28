@@ -13,15 +13,24 @@
 
         </div>
         <div fxFlex="15">  
-          <mat-spinner [diameter]="60" ></mat-spinner>
+          <mat-spinner [diameter]="60" *ngIf = loaderStatus></mat-spinner>
         </div>
+
         <div  fxFlex="75" fxLayoutAlign="end"> 
 
-          <button routerLink='/hello'>HELLO</button>
 
-          <div>
+          <div *ngIf="!IsLogged()">
             <mat-icon (click)="OpenDialog()">login</mat-icon>
           </div>
+          <div *ngIf="IsLogged()">
+            <span>
+              {{GetUserEmail()}}
+            </span>
+            <span>
+              <mat-icon (click)="LogOut()">power_settings_new</mat-icon>
+            </span>
+          </div>
+
         </div>
       </div>
 

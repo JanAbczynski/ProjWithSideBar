@@ -12,7 +12,9 @@ export class CommonServiceService {
   ShowSuccess(message: string, title: string, timeOut: number = 2000){
     this.toastr.success(message, title, {
       progressBar: true,
-      progressAnimation: "increasing"
+      progressAnimation: "increasing",
+      positionClass: "toast-top-center",
+      timeOut: timeOut
     })
   }
 
@@ -20,6 +22,7 @@ export class CommonServiceService {
     this.toastr.info(message, title, {
       progressBar: true,
       progressAnimation: "increasing",
+      positionClass: "toast-top-center",
       timeOut: timeOut
     })
   }
@@ -27,7 +30,9 @@ export class CommonServiceService {
   ShowError(message: string, title: string, timeOut: number = 2000){
     this.toastr.error(message, title, {
       progressBar: true,
-      progressAnimation: "increasing"
+      progressAnimation: "increasing",
+      positionClass: "toast-top-center",
+      timeOut: timeOut
     })
   }
 

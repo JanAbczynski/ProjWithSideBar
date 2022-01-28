@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LoaderService } from "../../services/loader.service"
+import { HeaderComponent } from '../header/header.component'
 
 @Component({
   selector: 'app-hello',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HelloComponent implements OnInit {
 
-  constructor() { }
+  constructor(private loaderService: LoaderService,
+    private headerComponent: HeaderComponent) { }
+
+  loader: boolean = false;
+
 
   ngOnInit(): void {
   }
 
+  RunLoader(){
+    console.log("LOADER");
+    this.loaderService.PushStatus(true);
+  }
+
+  StopLoader(){
+    this.loaderService.PushStatus(false);
+  }
 }

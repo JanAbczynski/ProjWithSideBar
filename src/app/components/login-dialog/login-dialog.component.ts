@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/models/user';
-import { RegisterLoginService } from 'src/app/services/register-login.service';
-import { CommonServiceService as CommonService } from 'src/app/services/common-service.service';
+import { RegisterLoginService } from '../../services/register-login.service';
+import { CommonServiceService as CommonService } from '../../services/common-service.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import {User} from '../../models/user'
+import { NotifierService } from '../../services/notifier.service';
+import { LoaderService } from "../../services/loader.service"
 
 @Component({
   selector: 'app-login-dialog',
@@ -19,10 +21,12 @@ export class LoginDialogComponent implements OnInit {
     private registerLoginService : RegisterLoginService,
     private commonService: CommonService,
     private dialogRef: MatDialogRef<LoginDialogComponent>,
-    private router: Router
+    private router: Router,
+    private notifierService: NotifierService,
+    private loaderService: LoaderService
   ) { }
 
-  userModel = new User('','');
+  userModel = new User();
   ngOnInit(): void {
   }
 
@@ -36,17 +40,23 @@ export class LoginDialogComponent implements OnInit {
 
 
   Login(userModel : User){
+    this.loaderService.PushStatus(true);
     this.registerLoginService.Login(userModel)
     .subscribe({
-      next: ((value: Object) => {
-        console.log("zalogowano")
+      next: ((response: any) => {
+        let token = response['token'];
+        localStorage.setItem("token", token);
+        this.dialogRef.close();     
+        this.commonService.ShowSuccess("Zostałeś zalogowany", "");
+        this.notifierService.showNotification("Zostałeś zalogowany", "X");
+        this.loaderService.PushStatus(false);
       }),
       error: ((value: Object) => {
 
          this.errorLoginMessage = JSON.parse(JSON.stringify(value)).error
-
-         console.log(this.errorLoginMessage);
-      })
+        this.notifierService.showNotification(this.errorLoginMessage, 'X');
+        this.loaderService.PushStatus(false);
+        })
       }
     )
   }
@@ -71,6 +81,7 @@ export class LoginDialogComponent implements OnInit {
           console.log(errorMessage);
           console.log(error);
           this.commonService.ShowError(errorMessage, 'Rejestracja');
+          this.commonService.ShowError(errorMessage, "Logowanie")
         }
       }
     )
@@ -78,7 +89,7 @@ export class LoginDialogComponent implements OnInit {
 
 
   TabChange(){
-    this.userModel = new User('','');
+    this.userModel = new User();
   }
 
 

@@ -11,32 +11,35 @@
           <h1>Ant Design Of Angular</h1>
         </a>
       </div>
-      <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isSidebarClosed">
-        <li nz-submenu nzOpen nzTitle="Dashboardaaa" nzIcon="dashboard">
-          <ul>
-            <li nz-menu-item nzMatchRouter>
-              <a routerLink="/welcome">Welcome</a>
-            </li>
-            <li nz-menu-item nzMatchRouter>
-              <a>Monitor</a>
-            </li>
-            <li nz-menu-item nzMatchRouter>
-              <a>Workplace</a>
-            </li>
-            <li nz-menu-item nzMatchRouter>
-              <a>Aaaaa</a>
-            </li>
-            <li nz-menu-item nzMatchRouter>
-              <a>Bbbbb</a>
-            </li>
-          </ul>
-        </li>
-        <li nz-submenu nzOpen nzTitle="{{isSidebarClosed}}" nzIcon="form">
-          <ul>
-            <li nz-menu-item nzMatchRouter>
-              <a>Basic Forma</a>
-            </li>
-          </ul>
-        </li>
+      <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isSidebarClosed" *ngIf="showAll">
+
+        <div #menu id="Zawody">
+          <li nz-submenu nzOpen nzTitle="{{menu.id}}" nzIcon="form" *ngIf="Show(menu.id)">
+            <ul>
+                <li nz-menu-item nzMatchRouter *ngIf="Show('opcja 1')">
+                  <a>opcja 1</a>
+                </li>
+
+                <li nz-menu-item nzMatchRouter *ngIf="Show('opcja 2')">
+                  <a>opcja 2</a>
+                </li>
+            </ul>
+          </li>
+        </div>
+
+
+          <li nz-submenu nzOpen nzTitle="Profil" nzIcon="form" *ngIf="Show('Profil')">
+            <ul>
+                <li nz-menu-item nzMatchRouter *ngIf="Show('Bezpieczeństwo')">
+                  <a routerLink="/profile/data">Bezpieczeństwo</a>
+                </li>
+
+                <li nz-menu-item nzMatchRouter *ngIf="Show('Dane osobiste')">
+                  <a>Dane osobiste</a>
+                </li>
+            </ul>
+          </li>
+
       </ul>
     </nz-sider>
+

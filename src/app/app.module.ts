@@ -19,9 +19,12 @@ import { MaterialModule } from './material/material.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
 import { CommonModule } from '@angular/common';
+import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { ProfileSecurityComponent } from './components/profile/profile-security/profile-security.component'
 
 import { ToastrModule } from 'ngx-toastr';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
+import { ProfileDataComponent } from './components/profile/profile-data/profile-data.component'
 
 registerLocaleData(pl);
 
@@ -32,6 +35,8 @@ registerLocaleData(pl);
     HeaderComponent,
     LoginDialogComponent,
     ConfirmationComponent,
+    ProfileSecurityComponent,
+    ProfileDataComponent,
     ArrayOfComponents
   ],
   entryComponents: [LoginDialogComponent],
@@ -48,9 +53,10 @@ registerLocaleData(pl);
     NzMenuModule,
     MaterialModule,
     FlexLayoutModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MatSnackBarModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: pl_PL }],
+  providers: [{ provide: NZ_I18N, useValue: pl_PL }, HeaderComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

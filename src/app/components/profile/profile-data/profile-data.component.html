@@ -1,0 +1,48 @@
+<div style="margin-top: 50px;">
+    <form #userForm="ngForm" (ngSubmit)="OnSubmitChangeData()" >     
+        <div>
+            <div fxFlex="35" fxLayoutAlign="end"> 
+                <mat-form-field appearance="fill" style="width:400px !important">
+                <mat-label>Imię</mat-label>
+                <input matInput required ngModel name="Name" [(ngModel)]="userModel.Name"><br>
+                </mat-form-field> <br>
+            </div>
+            
+            <div fxFlex="35" fxLayoutAlign="end"> 
+                <mat-form-field appearance="fill" style="width:400px !important">
+                <mat-label>Nazwisko</mat-label>
+                <input matInput required ngModel name="Password" [(ngModel)]="userModel.Surname"><br>
+                </mat-form-field><br>
+            </div>
+        </div>
+
+        <div>
+            <div fxFlex="35" fxLayoutAlign="end"> 
+                <mat-form-field appearance="fill" style="width:400px !important">
+                <mat-label>Data urodzin</mat-label>
+                <input matInput required ngModel name="Name" [(ngModel)]="userModel.BirthDate"><br>
+                </mat-form-field> <br>
+            </div>
+            
+            <div fxFlex="35" fxLayoutAlign="end"> 
+                <mat-form-field appearance="fill" style="width:400px !important">
+                <mat-label>Płeć</mat-label>
+                <input matInput required ngModel name="Password" [(ngModel)]="userModel.Gender"><br>
+                </mat-form-field><br>
+            </div>
+        </div>
+
+
+        <!-- <mat-form-field appearance="fill">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+          </mat-form-field> -->
+
+
+        <div>
+            <button color="primary" mat-button type="submit">Zaloguj</button>
+        </div>
+    </form>
+</div>
