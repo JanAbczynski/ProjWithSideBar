@@ -1,48 +1,234 @@
 <div style="margin-top: 50px;">
-    <form #userForm="ngForm" (ngSubmit)="OnSubmitChangeData()" >     
+
+{{userModel.BirthDate}}
+    <button (click)="Test()">TEST</button>
+
+    <mat-tab-group >
+    
+        <mat-tab label="Dane osobowe" >
+            <form #userForm="ngForm" (ngSubmit)="OnSubmitChangePersonalData()" >     
+                <div>
+                    <div fxFlex="45" fxLayoutAlign="end"> 
+                        <mat-form-field appearance="fill" style="width:400px !important">
+                        <mat-label>Imię</mat-label>
+                        <input matInput required ngModel name="Name" [(ngModel)]="userModel.Name"><br>
+                        </mat-form-field> <br>
+                    </div>
+                    
+                    <div fxFlex="45" fxLayoutAlign="end"> 
+                        <mat-form-field appearance="fill" style="width:400px !important">
+                        <mat-label>Nazwisko</mat-label>
+                        <input matInput required ngModel name="Surname" [(ngModel)]="userModel.Surname"><br>
+                        </mat-form-field><br>
+                    </div>
+                </div>
+
+                <div>
+                    <div fxFlex="45" fxLayoutAlign="end"> 
+
+
+                        <mat-form-field appearance="fill" style="width:400px !important">
+                            <mat-label>Data urodzin</mat-label>
+                            <input matInput [matDatepicker]="picker"  [(ngModel)]="userModel.BirthDate" name="BirthDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+                        </mat-form-field>
+
+
+                    </div>
+                    
+                    <div fxFlex="45" fxLayoutAlign="end"> 
+                
+                        <mat-form-field appearance="fill" style="width:400px !important">
+                            <mat-label>Płeć</mat-label>
+                            <mat-select  [(ngModel)]="userModel.Gender" name="Gender">
+                            <mat-option *ngFor="let gender of genders" [value]="gender.Id" >
+                                {{gender.Description}}
+                            </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                    </div>
+                </div>
+
+                <div>
+                    <div fxFlex="90" fxLayoutAlign="end"> 
+                        <button color="primary" mat-button type="submit">Aktualizuj dane osobowe</button>
+                    </div>
+                </div>
+            </form>
+        </mat-tab>   
+
+        <mat-tab label="Dane teleadresowe" >
+            <div>
+                <form #userForm="ngForm" (ngSubmit)="OnSubmitChangeAddressData()" >     
+
+                    <div>
+                        <div fxFlex="45" fxLayoutAlign="end"> 
+                    
+                            <mat-form-field appearance="fill" style="width:400px !important">
+                                <mat-label>Kraj</mat-label>
+                                <mat-select  [(ngModel)]="userModel.Country" name="Country">
+                                <mat-option *ngFor="let country of countries" [value]="country.FullName" >
+                                    {{country.FullName}}
+                                </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+    
+                        </div>
+
+                        <div fxFlex="45" fxLayoutAlign="end"> 
+                            <mat-form-field appearance="fill" style="width:400px !important">
+                            <mat-label>Kod pocztowy</mat-label>
+                            <input matInput ngModel name="ZipCode" [(ngModel)]="userModel.ZipCode"><br>
+                            </mat-form-field> <br>
+                        </div>
+                    </div>
+    
+                    <div>  
+                            <div fxFlex="45" fxLayoutAlign="end"> 
+                                <mat-form-field appearance="fill" style="width:400px !important">
+                                <mat-label>Miejscowość</mat-label>
+                                <input matInput ngModel name="City" [(ngModel)]="userModel.City"><br>
+                                </mat-form-field> <br>
+                            </div>
+       
+
+
+                            <div fxFlex="45" fxLayoutAlign="end"> 
+                                <mat-form-field appearance="fill" style="width:400px !important">
+                                <mat-label>Ulica</mat-label>
+                                <input matInput ngModel name="Street" [(ngModel)]="userModel.Street"><br>
+                                </mat-form-field> <br>
+                            </div> 
+                    </div>
+    
+    
+                    <div>  
+                        <div fxFlex="45" fxLayoutAlign="end"> 
+                            <mat-form-field appearance="fill" style="width:400px !important">
+                            <mat-label>Nr budynku</mat-label>
+                            <input matInput ngModel name="BuildingNumber" [(ngModel)]="userModel.BuildingNumber"><br>
+                            </mat-form-field> <br>
+                        </div>
+   
+
+
+                        <div fxFlex="45" fxLayoutAlign="end"> 
+                            <mat-form-field appearance="fill" style="width:400px !important">
+                            <mat-label>Nr lokalu</mat-label>
+                            <input matInput ngModel name="LocalNuber" [(ngModel)]="userModel.LocalNuber"><br>
+                            </mat-form-field> <br>
+                        </div> 
+                </div>
+    
+                    <div>
+                        <div fxFlex="90" fxLayoutAlign="end"> 
+                            <button color="primary" mat-button type="submit">Aktualizuj dane adresowe</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </mat-tab>   
+
+        <mat-tab label="Bezpieczeństwo" >
+            <div>
+                <div>
+
+                    <div fxFlex="25" fxLayoutAlign="end">  
+                        <button 
+                        mat-raised-button 
+                        color="primary"  
+                        (click)="StartToChangePass();">
+                        {{(allowTOChangePass? "Jednak nie zmieniaj..." :  "Zmień hasło" )}}
+                    </button>
+                    </div>
+        
+                        <div fxFlex="25" fxLayoutAlign="end"> 
+                       
+                            <button 
+                            mat-raised-button 
+                            color="primary"  
+                            (click)="StartToChangeEmail();">
+                            {{(allowTOChangeEmail? "Jednak nie..." :  "Zmień email" )}}
+                        </button>
+                        </div>
+                        
+                </div>
+
+<div>
+    
+
+    <form #userForm="ngForm" (ngSubmit)="OnSubmitChangeEmail()" *ngIf=allowTOChangeEmail>     
         <div>
-            <div fxFlex="35" fxLayoutAlign="end"> 
+            <div fxFlex="100" fxLayoutAlign="center"> 
                 <mat-form-field appearance="fill" style="width:400px !important">
-                <mat-label>Imię</mat-label>
-                <input matInput required ngModel name="Name" [(ngModel)]="userModel.Name"><br>
+                <mat-label>Email</mat-label>
+                <input matInput required ngModel name="SecondEmail" [(ngModel)]="userModel.SecondEmail"><br>
                 </mat-form-field> <br>
             </div>
-            
-            <div fxFlex="35" fxLayoutAlign="end"> 
-                <mat-form-field appearance="fill" style="width:400px !important">
-                <mat-label>Nazwisko</mat-label>
-                <input matInput required ngModel name="Password" [(ngModel)]="userModel.Surname"><br>
-                </mat-form-field><br>
-            </div>
-        </div>
 
+        </div>
         <div>
-            <div fxFlex="35" fxLayoutAlign="end"> 
-                <mat-form-field appearance="fill" style="width:400px !important">
-                <mat-label>Data urodzin</mat-label>
-                <input matInput required ngModel name="Name" [(ngModel)]="userModel.BirthDate"><br>
-                </mat-form-field> <br>
-            </div>
-            
-            <div fxFlex="35" fxLayoutAlign="end"> 
-                <mat-form-field appearance="fill" style="width:400px !important">
-                <mat-label>Płeć</mat-label>
-                <input matInput required ngModel name="Password" [(ngModel)]="userModel.Gender"><br>
-                </mat-form-field><br>
+            <div fxFlex="90" fxLayoutAlign="end"> 
+                <button color="primary" mat-button type="submit">Aktualizuj dane osobowe</button>
             </div>
         </div>
-
-
-        <!-- <mat-form-field appearance="fill">
-            <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="picker">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
-          </mat-form-field> -->
-
-
-        <div>
-            <button color="primary" mat-button type="submit">Zaloguj</button>
-        </div>
+      
     </form>
+
+
+                <form #userForm="ngForm" (ngSubmit)="OnSubmitChangePassword()" *ngIf=allowTOChangePass>     
+                    <div>
+                        <div fxFlex="100" fxLayoutAlign="center"> 
+                            <mat-form-field appearance="fill" style="width:400px !important">
+                            <mat-label>Stare hasło</mat-label>
+                            <input matInput required ngModel name="Password" [(ngModel)]="userModel.Password"><br>
+                            </mat-form-field> <br>
+                        </div>
+
+                    </div>
+                    <div>
+
+                        <div fxFlex="100" fxLayoutAlign="center"> 
+                            <mat-form-field appearance="fill" style="width:400px !important">
+                            <mat-label>Nowe hasło</mat-label>
+                            <input matInput required ngModel name="NewPassword" [(ngModel)]="userModel.NewPassword"><br>
+                            </mat-form-field> <br>
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <div fxFlex="100" fxLayoutAlign="center"> 
+                            <mat-form-field appearance="fill" style="width:400px !important">
+                            <mat-label>Powtórz nowe hasło</mat-label>
+                            <input matInput required ngModel name="SecondPass" [(ngModel)]="userModel.SecondPass"><br>
+                            </mat-form-field> <br>
+                        </div>
+
+                    </div>
+    
+    
+                    <div>
+                        <div fxFlex="90" fxLayoutAlign="end"> 
+                            <button color="primary" mat-button type="submit">Aktualizuj dane osobowe</button>
+                        </div>
+                    </div>
+
+                    
+                </form>
+
+            </div>
+
+            <div *ngIf="changeEmailInfo">
+                Została zainicjowany procedura zmiany adresu email. Na adres {{userModel.SecondEmail}} został wysłany link potwierdzający.Sprawdźskrzynkę pocztową.
+            </div>
+
+
+            </div>
+        </mat-tab>   
+
+
+    </mat-tab-group>
 </div>

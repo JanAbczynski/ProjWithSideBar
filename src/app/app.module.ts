@@ -25,6 +25,11 @@ import { ProfileSecurityComponent } from './components/profile/profile-security/
 import { ToastrModule } from 'ngx-toastr';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { ProfileDataComponent } from './components/profile/profile-data/profile-data.component'
+import { MatDatepickerModule } from '@angular/material/datepicker'
+import { MatNativeDateModule  } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select'
+import { CompetitionMenuComponent } from './components/competition-menu/competition-menu.component';
+import { ShootingRangeComponent } from './components/shooting-range/shooting-range.component';
 
 registerLocaleData(pl);
 
@@ -37,6 +42,8 @@ registerLocaleData(pl);
     ConfirmationComponent,
     ProfileSecurityComponent,
     ProfileDataComponent,
+    CompetitionMenuComponent,
+    ShootingRangeComponent,
     ArrayOfComponents
   ],
   entryComponents: [LoginDialogComponent],
@@ -53,6 +60,9 @@ registerLocaleData(pl);
     NzMenuModule,
     MaterialModule,
     FlexLayoutModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
     ToastrModule.forRoot(),
     MatSnackBarModule
   ],

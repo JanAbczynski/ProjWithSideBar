@@ -35,7 +35,9 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     // this.loaderStatus = this.loaderService.GetStatus();
     this.subscription = this.loaderService.GetStatus()
-    .subscribe(item => this.SetLoad(item))
+    .subscribe(item => {
+      this.SetLoad(item);
+    })
   }
 
   SetLoad(loaderStatus: any){
@@ -77,14 +79,17 @@ export class HeaderComponent implements OnInit {
     this.loginService.logout();
     this.commonService.ShowSuccess("Zostałeś wylogowany", "");
     this.notifierService.showNotification("Zostałeś wylogowany", "");
+    this.commonService.ReloadMenuInit();
   }
 
   noti(){
-    console.log(this.loginService.GetTokenInfo()['email']);
+    let tokenString = this.loginService.GetTokenString();
+    console.log(this.loginService.GetTokenInfo(tokenString)['email']);
   }
 
   GetUserEmail(){
-    return this.loginService.GetTokenInfo()['email'];
+    let tokenString = this.loginService.GetTokenString();
+    return this.loginService.GetTokenInfo(tokenString)['email'];
   }
 
   IsLogged(){

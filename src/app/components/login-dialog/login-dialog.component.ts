@@ -38,6 +38,10 @@ export class LoginDialogComponent implements OnInit {
     this.RegisterNewUser(this.userModel);
   }
 
+  OnSubmitPassReset(){
+    this.PassReset(this.userModel)
+  }
+
 
   Login(userModel : User){
     this.loaderService.PushStatus(true);
@@ -48,14 +52,17 @@ export class LoginDialogComponent implements OnInit {
         localStorage.setItem("token", token);
         this.dialogRef.close();     
         this.commonService.ShowSuccess("Zostałeś zalogowany", "");
+        this.commonService.ReloadMenuInit();
         this.notifierService.showNotification("Zostałeś zalogowany", "X");
         this.loaderService.PushStatus(false);
+
       }),
       error: ((value: Object) => {
 
          this.errorLoginMessage = JSON.parse(JSON.stringify(value)).error
         this.notifierService.showNotification(this.errorLoginMessage, 'X');
         this.loaderService.PushStatus(false);
+        this.commonService.ReloadMenuInit();
         })
       }
     )
@@ -87,6 +94,26 @@ export class LoginDialogComponent implements OnInit {
     )
   }
 
+  PassReset(userModel : User){
+    this.registerLoginService.PassReset(userModel)
+    .subscribe({
+      next: ((response: any) => {
+        let token = response['token'];
+        localStorage.setItem("token", token);
+        this.dialogRef.close();     
+        this.commonService.ShowSuccess("Zostałeś zalogowany", "");
+        this.notifierService.showNotification("Zostałeś zalogowany", "X");
+        this.loaderService.PushStatus(false);
+      }),
+      error: ((value: Object) => {
+
+         this.errorLoginMessage = JSON.parse(JSON.stringify(value)).error
+        this.notifierService.showNotification(this.errorLoginMessage, 'X');
+        this.loaderService.PushStatus(false);
+        })
+      }
+    )
+  }
 
   TabChange(){
     this.userModel = new User();

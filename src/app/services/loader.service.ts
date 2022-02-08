@@ -12,7 +12,6 @@ export class LoaderService {
 
   PushStatus(status: boolean){
     this.loaderStatus = status;
-    console.log(this.loaderStatus);
     this.emitLoaderStatus(status)
     
   }

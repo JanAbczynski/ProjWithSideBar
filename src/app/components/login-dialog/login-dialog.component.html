@@ -23,6 +23,7 @@
                     </mat-form-field><br>
         
                     <button color="primary" mat-button type="submit">Zaloguj</button>
+                    <button color="primary" mat-button type="submit">Nie pamiętam hasła</button>
                 </form>
             </div>
             
@@ -57,5 +58,24 @@
 
 
     </mat-tab>
+
+    <mat-tab label="Reset hasła" >
+
+            
+        <div fxLayoutAlign="center" style="min-height: 400px;">
+            <div style="margin-top: 50px;">
+                <form #userForm="ngForm" (ngSubmit)="OnSubmitPassReset()" >     
+                    <mat-form-field appearance="fill" >
+                    <mat-label>Email</mat-label>
+                    <input matInput required ngModel name="Email" [(ngModel)]="userModel.Email"><br>
+                    </mat-form-field> <br>
+                    
+                    <button color="primary" mat-button type="submit">Wyślij link resetujący</button>
+                </form>
+            </div>
+            
+        </div>
+
+    </mat-tab>  
 
 </mat-tab-group>

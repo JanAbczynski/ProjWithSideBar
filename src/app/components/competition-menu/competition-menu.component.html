@@ -1,0 +1,59 @@
+
+
+<mat-tab-group>
+    
+    <mat-tab label="Czas i miejsce" >
+
+
+
+
+        <form #userForm="ngForm" (ngSubmit)="CreateCompetition()" >     
+            <div>
+
+                <div fxFlex="45" fxLayoutAlign="end"> 
+                    <mat-form-field appearance="fill" style="width:400px !important">
+                        <mat-label>Data zawodów</mat-label>
+                        <input matInput [matDatepicker]="picker"  [(ngModel)]="competition.startDate" name="StartDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                
+                <div fxFlex="45" fxLayoutAlign="end"> 
+                    <mat-form-field appearance="fill" style="width:400px !important">
+                    <mat-label>Miejsce zawodów</mat-label>
+                    <input matInput required ngModel name="place" [(ngModel)]="competition.place"><br>
+                    </mat-form-field><br>
+                </div>
+            </div>
+
+        
+
+            <div>
+                <div fxFlex="90" fxLayoutAlign="end"> 
+                    <button color="primary" mat-button type="submit">Aktualizuj dane osobowe</button>
+                </div>
+            </div>
+        </form>
+
+
+
+
+
+
+    </mat-tab>    
+    <mat-tab label="Konkurencje" >
+
+        
+
+
+    </mat-tab>
+
+    <mat-tab label="Ludzie" >
+
+            
+
+
+    </mat-tab>  
+
+</mat-tab-group>

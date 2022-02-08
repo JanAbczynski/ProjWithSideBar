@@ -11,13 +11,14 @@
           <h1>Ant Design Of Angular</h1>
         </a>
       </div>
+
+<!--       
       <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isSidebarClosed" *ngIf="showAll">
 
-        <div #menu id="Zawody">
-          <li nz-submenu nzOpen nzTitle="{{menu.id}}" nzIcon="form" *ngIf="Show(menu.id)">
+          <li nz-submenu nzOpen nzTitle="Zawody" nzIcon="form" *ngIf="Show('Zawody')">
             <ul>
-                <li nz-menu-item nzMatchRouter *ngIf="Show('opcja 1')">
-                  <a>opcja 1</a>
+                <li nz-menu-item nzMatchRouter *ngIf="Show('Organizacja zawodów')">
+                  <a routerLink="/competition/organization">Organizacja zawodów</a>
                 </li>
 
                 <li nz-menu-item nzMatchRouter *ngIf="Show('opcja 2')">
@@ -25,21 +26,38 @@
                 </li>
             </ul>
           </li>
-        </div>
-
 
           <li nz-submenu nzOpen nzTitle="Profil" nzIcon="form" *ngIf="Show('Profil')">
             <ul>
-                <li nz-menu-item nzMatchRouter *ngIf="Show('Bezpieczeństwo')">
-                  <a routerLink="/profile/data">Bezpieczeństwo</a>
+                <li nz-menu-item nzMatchRouter *ngIf="Show('Dane osobiste')">
+                  <a routerLink="/profile/data">Dane osobiste</a>
                 </li>
 
-                <li nz-menu-item nzMatchRouter *ngIf="Show('Dane osobiste')">
-                  <a>Dane osobiste</a>
+                <li nz-menu-item nzMatchRouter *ngIf="Show('XXX')">
+                  <a>XXX</a>
                 </li>
             </ul>
           </li>
 
+      </ul> -->
+
+
+
+
+
+      <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isSidebarClosed" *ngIf="showAll">
+        <div *ngFor="let menu of AllowedMenu">
+          <li nz-submenu nzOpen nzTitle="{{menu.mainMenu}}" nzIcon="form">
+            <ul>
+              <div *ngFor="let subMenu of menu.subMenu">
+                <li nz-menu-item nzMatchRouter>
+                  <a routerLink="{{subMenu.link}}">{{subMenu.subMenu}}</a>
+                </li>
+              </div>
+            </ul>
+          </li>
+        </div>
       </ul>
+
     </nz-sider>
 

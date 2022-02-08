@@ -1,0 +1,141 @@
+<p>shooting-range works!</p>
+
+<button (click)="Test()">test</button>
+
+
+<form #userForm="ngForm" (ngSubmit)="OnSubmitCreateSR()" *ngIf="shootingRangeModel.Address != null">     
+    <div>
+        <div fxFlex="45" fxLayoutAlign="end"> 
+            <mat-form-field appearance="fill" style="width:400px !important">
+            <mat-label>Nazwa</mat-label>
+            <input matInput required ngModel name="Name" [(ngModel)]="shootingRangeModel.Name"><br>
+            </mat-form-field> <br>
+        </div>
+        
+        <div fxFlex="45" fxLayoutAlign="end"> 
+            <mat-form-field appearance="fill" style="width:400px !important">
+            <mat-label>Opis</mat-label>
+            <input matInput required ngModel name="Surname" [(ngModel)]="shootingRangeModel.Description"><br>
+            </mat-form-field><br>
+        </div>
+    </div>
+
+    
+    <div *ngIf="shootingRangeModel.Address != null && shootingRangeModel.OneRange != null">
+        qe
+    {{shootingRangeModel.Address.City}}
+    </div>
+
+    <div>
+        <div fxFlex="45" fxLayoutAlign="end"> 
+            <mat-form-field appearance="fill" style="width:400px !important">
+            <mat-label>Kraj</mat-label>
+            <input matInput required ngModel name="Name" [(ngModel)]="shootingRangeModel.Address.Country"><br>
+            </mat-form-field> <br>
+        </div>
+        
+        <div fxFlex="45" fxLayoutAlign="end"> 
+            <mat-form-field appearance="fill" style="width:400px !important">
+            <mat-label>Kod pocztowy</mat-label>
+            <input matInput required ngModel name="Surname" [(ngModel)]="shootingRangeModel.Address.ZipCode"><br>
+            </mat-form-field><br>
+        </div>
+    </div>
+
+    
+    <div>
+        <div fxFlex="45" fxLayoutAlign="end"> 
+            <mat-form-field appearance="fill" style="width:400px !important">
+            <mat-label>Kraj</mat-label>
+            <input matInput required ngModel name="Name" [(ngModel)]="shootingRangeModel.Address.City"><br>
+            </mat-form-field> <br>
+        </div>
+        
+        <div fxFlex="45" fxLayoutAlign="end"> 
+            <mat-form-field appearance="fill" style="width:400px !important">
+            <mat-label>Ulica</mat-label>
+            <input matInput required ngModel name="Surname" [(ngModel)]="shootingRangeModel.Address.Street"><br>
+            </mat-form-field><br>
+        </div>
+    </div>
+    
+
+
+    <div>
+        <div fxFlex="45" fxLayoutAlign="end"> 
+            <mat-form-field appearance="fill" style="width:400px !important">
+            <mat-label>Numer</mat-label>
+            <input matInput required ngModel name="Name" [(ngModel)]="shootingRangeModel.Address.BuildingNumber"><br>
+            </mat-form-field> <br>
+        </div>
+        
+        <div fxFlex="45" fxLayoutAlign="end"> 
+            <mat-form-field appearance="fill" style="width:400px !important">
+            <mat-label>Lokal</mat-label>
+            <input matInput required ngModel name="Surname" [(ngModel)]="shootingRangeModel.Address.LocalNumber"><br>
+            </mat-form-field><br>
+        </div>
+    </div>
+
+
+    <button (click)="AddOneRange()">Dodaj oś</button>
+
+    <div  *ngIf="shootingRangeModel.OneRange != null">
+        <div *ngFor="let oneOneRange of shootingRangeModel.OneRange">
+            <div fxFlex="45" fxLayoutAlign="end"> 
+                <mat-form-field appearance="fill" style="width:400px !important">
+                <mat-label>Opis</mat-label>
+                <input matInput required ngModel name="Name" [(ngModel)]="oneOneRange.Description"><br>
+                </mat-form-field> <br>
+            </div>
+
+            
+            <div fxFlex="45" fxLayoutAlign="end"> 
+                <mat-form-field appearance="fill" style="width:400px !important">
+                <mat-label>Dystans</mat-label>
+                <input matInput required ngModel name="Name" [(ngModel)]="oneOneRange.Distance"><br>
+                </mat-form-field> <br>
+            </div>
+        </div>
+
+
+
+        
+
+    </div>
+
+
+    <!-- <div>
+        <div fxFlex="45" fxLayoutAlign="end"> 
+
+
+            <mat-form-field appearance="fill" style="width:400px !important">
+                <mat-label>Data urodzin</mat-label>
+                <input matInput [matDatepicker]="picker"  [(ngModel)]="userModel.BirthDate" name="BirthDate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+            </mat-form-field>
+
+
+        </div>
+        
+        <div fxFlex="45" fxLayoutAlign="end"> 
+    
+            <mat-form-field appearance="fill" style="width:400px !important">
+                <mat-label>Płeć</mat-label>
+                <mat-select  [(ngModel)]="userModel.Gender" name="Gender">
+                <mat-option *ngFor="let gender of genders" [value]="gender.Id" >
+                    {{gender.Description}}
+                </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+        </div>
+    </div> -->
+
+    <div>
+        <div fxFlex="90" fxLayoutAlign="end"> 
+            <button color="primary" mat-button type="submit">Aktualizuj dane osobowe</button>
+        </div>
+    </div>
+</form>

@@ -1,6 +1,7 @@
 export class User {
 
     public Email?: string;
+    public SecondEmail?: string;
     public Password?: string;
     public SecondPass?: string;
     public NewPassword?: string;

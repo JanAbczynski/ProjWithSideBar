@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonServiceService } from '../../services/common-service.service';
 import { LoaderService } from "../../services/loader.service"
 import { HeaderComponent } from '../header/header.component'
 
@@ -9,8 +10,11 @@ import { HeaderComponent } from '../header/header.component'
 })
 export class HelloComponent implements OnInit {
 
-  constructor(private loaderService: LoaderService,
-    private headerComponent: HeaderComponent) { }
+  constructor(
+    private loaderService: LoaderService,
+    private headerComponent: HeaderComponent,
+    private commonServiceService: CommonServiceService
+    ) { }
 
   loader: boolean = false;
 
@@ -19,7 +23,7 @@ export class HelloComponent implements OnInit {
   }
 
   RunLoader(){
-    console.log("LOADER");
+    this.commonServiceService.ReloadMenuInit();
     this.loaderService.PushStatus(true);
   }
 

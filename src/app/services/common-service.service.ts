@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 
 
@@ -7,7 +7,18 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class CommonServiceService {
 
+  reloadMenu: EventEmitter<boolean> = new EventEmitter();
+
   constructor(private toastr: ToastrService) { }
+
+  ReloadMenuInit(){
+    this.reloadMenu.emit();
+  }
+
+  ReloadMenuRead(){
+    console.log("emit read");
+    return this.reloadMenu;
+  }
 
   ShowSuccess(message: string, title: string, timeOut: number = 2000){
     this.toastr.success(message, title, {
@@ -35,6 +46,9 @@ export class CommonServiceService {
       timeOut: timeOut
     })
   }
+
+
+
 
 
 
