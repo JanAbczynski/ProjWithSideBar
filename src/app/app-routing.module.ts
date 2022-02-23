@@ -5,7 +5,10 @@ import { HelloComponent } from './components/hello/hello.component'
 import { ProfileSecurityComponent } from './components/profile/profile-security/profile-security.component'
 import { ProfileDataComponent } from './components/profile/profile-data/profile-data.component'
 import { CompetitionMenuComponent } from './components/competition-menu/competition-menu.component';
-import { ShootingRangeComponent } from './components/shooting-range/shooting-range.component';
+import { TPsideBarComponent } from './components/TurboPuszka/tpside-bar/tpside-bar.component';
+import { ShootingRangeComponent } from './components/shootingRange/shooting-range/shooting-range.component';
+import { ShootingRangeListComponent } from './components/shootingRange/shooting-range-list/shooting-range-list.component';
+import { ShootingRangeEditComponent } from './components/shootingRange/shooting-range-edit/shooting-range-edit.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/hello' },
@@ -15,8 +18,15 @@ const routes: Routes = [
   { path: 'profile/security', component: ProfileSecurityComponent},
   { path: 'profile/data', component: ProfileDataComponent},
   { path: 'competition/organization', component: CompetitionMenuComponent},
-  { path: 'shootingRange/create', component: ShootingRangeComponent}
+  { path: 'shootingRange/create', component: ShootingRangeComponent},
+  { path: 'shootingRange/list', component: ShootingRangeListComponent},
+  { path: 'shootingRange/edit/:id', component: ShootingRangeEditComponent},
+  { path: 'turboPuszka/sideBarMenu', component: TPsideBarComponent}
+
 ];
+
+
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

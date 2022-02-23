@@ -44,7 +44,7 @@ export class LoginDialogComponent implements OnInit {
 
 
   Login(userModel : User){
-    this.loaderService.PushStatus(true);
+    this.commonService.PushStatus(true);
     this.registerLoginService.Login(userModel)
     .subscribe({
       next: ((response: any) => {
@@ -54,14 +54,14 @@ export class LoginDialogComponent implements OnInit {
         this.commonService.ShowSuccess("Zostałeś zalogowany", "");
         this.commonService.ReloadMenuInit();
         this.notifierService.showNotification("Zostałeś zalogowany", "X");
-        this.loaderService.PushStatus(false);
+        this.commonService.PushStatus(false);
 
       }),
       error: ((value: Object) => {
 
          this.errorLoginMessage = JSON.parse(JSON.stringify(value)).error
         this.notifierService.showNotification(this.errorLoginMessage, 'X');
-        this.loaderService.PushStatus(false);
+        this.commonService.PushStatus(false);
         this.commonService.ReloadMenuInit();
         })
       }
@@ -72,21 +72,15 @@ export class LoginDialogComponent implements OnInit {
     this.registerLoginService.Register(userModel)
     .subscribe(
       res => {
-        console.log("zarejestrowano");
         this.router.navigate(['/hello'])
         this.dialogRef.close();         
       },
       (error: Response) => {
         if(error.status == 409){
-          console.log("409");
           let errorMessage = JSON.parse(JSON.stringify(error)).error;
-          console.log(errorMessage);
           this.commonService.ShowError(errorMessage, 'Rejestracja');
         }else{
-          console.log("409");
           let errorMessage = JSON.parse(JSON.stringify(error)).error;
-          console.log(errorMessage);
-          console.log(error);
           this.commonService.ShowError(errorMessage, 'Rejestracja');
           this.commonService.ShowError(errorMessage, "Logowanie")
         }
@@ -103,13 +97,13 @@ export class LoginDialogComponent implements OnInit {
         this.dialogRef.close();     
         this.commonService.ShowSuccess("Zostałeś zalogowany", "");
         this.notifierService.showNotification("Zostałeś zalogowany", "X");
-        this.loaderService.PushStatus(false);
+        this.commonService.PushStatus(false);
       }),
       error: ((value: Object) => {
 
          this.errorLoginMessage = JSON.parse(JSON.stringify(value)).error
         this.notifierService.showNotification(this.errorLoginMessage, 'X');
-        this.loaderService.PushStatus(false);
+        this.commonService.PushStatus(false);
         })
       }
     )

@@ -30,8 +30,6 @@ export class LoginService {
   SetAuthData(){
     let token = localStorage.getItem("token")
     if(token != null){
-      var x =  "Bearer " + localStorage.getItem("token")!.toString();
-      console.log(x);
       return "Bearer " + localStorage.getItem("token")!.toString();
     }else{
       return "";
@@ -93,7 +91,6 @@ export class LoginService {
 
 
   logout(){
-    console.log("logout")
     localStorage.removeItem('token');
     this.router.navigate(['/']);
   }

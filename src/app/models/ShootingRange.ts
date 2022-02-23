@@ -4,7 +4,7 @@ import { OneRange } from "./OneRange";
 
 export class ShootingRange {
 
-    public Id?: any;
+    public Id?: string;
     public Name?: string;
     public Description?: string;
     public Address?: customAddress;

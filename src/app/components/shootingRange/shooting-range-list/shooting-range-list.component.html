@@ -1,0 +1,108 @@
+<mat-form-field>
+    <input (keyup)="applyFIlter(in.value)" #in  matInput  placeholder="Filter">
+</mat-form-field>
+
+<mat-form-field>
+    <input (keyup)="customFIlter(test.value)" #test  matInput  placeholder="Nazwa">
+</mat-form-field>
+
+<span class="material-icons">
+  arrow_drop_down
+  </span>
+
+  <span class="material-icons">
+    arrow_drop_up
+    </span>
+
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nazwa</th>
+      <th>Description</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let oneSR of shootingRanges">
+      <td>{{oneSR.Id}}</td>
+      <td>{{oneSR.Name}}</td>
+      <td>{{oneSR.Description}}</td>
+
+    </tr>
+  </tbody>
+
+</table>
+
+
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" 
+         matSortDirection="desc" matSort>
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+  
+
+    <ng-container matColumnDef="Name">
+      <th mat-header-cell *matHeaderCellDef> 
+        <input (keyup)="customFIlter(test.value)" #test  matInput  placeholder="Nazwa" fxFlex="70">
+        <span (click)="CustomSort('Name')" fxFlex="30">
+          <span *ngIf="SortMark('Name') == 1" class="material-icons">
+            arrow_drop_down
+          </span>
+          <span *ngIf="SortMark('Name') == 0" class="material-icons">
+            unfold_more
+          </span>
+          <span  *ngIf="SortMark('Name') == -1" class="material-icons">
+            arrow_drop_up
+          </span>  
+        </span>
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+    </ng-container>
+  
+
+    <ng-container matColumnDef="ZipCode">
+      <th mat-header-cell *matHeaderCellDef> 
+        <input (keyup)="customFIlter(test.value)" #test  matInput  placeholder="ZipCode"><span>sss</span>
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.ZipCode}} </td>
+    </ng-container>
+  
+
+    <ng-container  matColumnDef="City">
+      <th mat-header-cell *matHeaderCellDef> 
+        Miejscowość 
+        <span (click)="CustomSort('City')">
+          <span *ngIf="SortMark('City') == 1" class="material-icons">
+            arrow_drop_down
+          </span>
+          <span *ngIf="SortMark('City') == 0" class="material-icons">
+            unfold_more
+          </span>
+          <span  *ngIf="SortMark('City') == -1" class="material-icons">
+            arrow_drop_up
+          </span>      
+        </span>
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.City}} </td>
+    </ng-container>
+  
+
+    <ng-container matColumnDef="Delete">
+      <th mat-header-cell *matHeaderCellDef>  </th>
+      <td mat-cell *matCellDef="let element"> 
+        <button mat-button color="primary" (click)="Edit(element.Id)">Edytuj</button>  
+        <button mat-button color="warn" (click)="AskForDelete(element.Id)">Usuń</button>  
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+  
+  

@@ -48,20 +48,15 @@ export class RegisterLoginService {
   GetAllowMenu(token: string) {
 
     let data : Object = {Token : token};
-    console.log(data)
-    console.log( this.loginService.SetOpts())
     return this.http.post<User>(this.url + "/GetAllowMenu", data, this.loginService.SetOpts());
   }
 
   GetAllowMenu2() {
-
-    console.log( this.loginService.SetOpts())
     return this.http.post<User>(this.url + "/GetAllowMenu2", {} ,this.loginService.SetOpts());
   }
 
 
   GetUserData() {
-    console.log("GetUserData")
     return this.http.get<User>(this.url + "/GetUserData", this.loginService.SetOpts());
   }
 

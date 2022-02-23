@@ -24,10 +24,10 @@ export class HelloComponent implements OnInit {
 
   RunLoader(){
     this.commonServiceService.ReloadMenuInit();
-    this.loaderService.PushStatus(true);
+    this.commonServiceService.PushStatus(true);
   }
 
   StopLoader(){
-    this.loaderService.PushStatus(false);
+    this.commonServiceService.PushStatus(false);
   }
 }

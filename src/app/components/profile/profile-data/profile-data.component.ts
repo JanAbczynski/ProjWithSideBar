@@ -6,6 +6,7 @@ import { Country } from '../../../models/Country';
 import { LoginService } from '../../../services/login.service';
 import { RegisterLoginService } from '../../../services/register-login.service';
 import { LoaderService } from '../../../services/loader.service';
+import { CommonServiceService } from '../../../services/common-service.service';
 
 @Component({
   selector: 'app-profile-data',
@@ -18,7 +19,8 @@ export class ProfileDataComponent implements OnInit {
     private router: Router,
     private loginService: LoginService,
     private registerService: RegisterLoginService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private commonService: CommonServiceService
     ) { }
 
     allowTOChangePass = false;
@@ -60,7 +62,6 @@ export class ProfileDataComponent implements OnInit {
   }
 
   Test(){
-    console.log(this.genders);
   }
 
 
@@ -70,7 +71,7 @@ export class ProfileDataComponent implements OnInit {
   
 
   OnSubmitChangePersonalData(){
-    this.loaderService.PushStatus(true);
+    this.commonService.PushStatus(true);
     this.ChangePersonalData(this.userModel)
     
   }
@@ -81,7 +82,7 @@ export class ProfileDataComponent implements OnInit {
       next : ((response: any) => {this.userModel = response}),
       error : ((response : any) => {})
     })
-    this.loaderService.PushStatus(false);
+    this.commonService.PushStatus(false);
   }
 
 
@@ -98,7 +99,7 @@ export class ProfileDataComponent implements OnInit {
   }
 
   OnSubmitChangePassword(){
-    this.loaderService.PushStatus(true);
+    this.commonService.PushStatus(true);
     this.ChangePass(this.userModel);
   }
 
@@ -106,12 +107,11 @@ export class ProfileDataComponent implements OnInit {
     this.registerService.ChangePassword(user)
     .subscribe({
       next : ((response: any) => {
-        console.log(response);
       }),
       error : ((response : any) => {
-        console.log('response');})
+        })
     })
-    this.loaderService.PushStatus(false);
+    this.commonService.PushStatus(false);
   }
 
 
@@ -125,7 +125,7 @@ export class ProfileDataComponent implements OnInit {
   }
 
   OnSubmitChangeAddressData(){
-    this.loaderService.PushStatus(true);
+    this.commonService.PushStatus(true);
     this.ChangeAddressData(this.userModel)
   }
 
@@ -135,7 +135,7 @@ export class ProfileDataComponent implements OnInit {
       next : ((response: any) => {this.userModel = response}),
       error : ((response : any) => {})
     })
-    this.loaderService.PushStatus(false);
+    this.commonService.PushStatus(false);
   }
 
 

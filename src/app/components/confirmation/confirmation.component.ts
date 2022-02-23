@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CodeService } from 'src/app/services/code.service';
 import { CommonModule } from '@angular/common';
+import { CodeService } from '../../services/code.service';
 
 @Component({
   selector: 'app-confirmation',
@@ -25,20 +25,17 @@ public id: string | any;
 
 
   VerifyCode(id: string){
-    console.log('id')
-    console.log(id)
     this.commonService.VerifyEmail(id)
     .subscribe({
       next: ((value: Object) => {
         this.errorMessage = null;
         this.correctMessage = "Ok";
-        console.log(value);
-        console.log("OK")}),
+      }),
       error: ((value: Object) => {
         console.log(value);
         this.correctMessage = null;
         this.errorMessage = JSON.parse(JSON.stringify(value)).error;
-        console.log("ERR")})
+     })
       }
     )
   }

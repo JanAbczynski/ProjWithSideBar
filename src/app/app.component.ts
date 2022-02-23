@@ -25,7 +25,6 @@ export class AppComponent {
   }
 
   ReceivedMessage($event : any){
-    console.log("received")
     this.isSidebarClosed = $event
   }
 

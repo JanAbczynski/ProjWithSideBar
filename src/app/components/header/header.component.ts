@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     // this.loaderStatus = this.loaderService.GetStatus();
-    this.subscription = this.loaderService.GetStatus()
+    this.subscription = this.commonService.GetStatus()
     .subscribe(item => {
       this.SetLoad(item);
     })
@@ -46,7 +46,6 @@ export class HeaderComponent implements OnInit {
 
   GetLoader(){
     this.loaderStatus = !this.loaderStatus;
-    console.log(this.loaderStatus )
   }
 
   SidebarControl(){
@@ -56,21 +55,16 @@ export class HeaderComponent implements OnInit {
 
 
   ControlSidebar(){
-    console.log(this.isCollapsed);
     this.isCollapsed = !this.isCollapsed
-    console.log(this.isCollapsed);
   }
 
 
   OnSubmit(){
-    console.log("submit");
   }
 
   OpenDialog(){
-    console.log("open");
     let dialogBox = this.dialog.open(LoginDialogComponent);
     dialogBox.afterClosed().subscribe(result =>{
-      console.log(`${result}`);
     })
   }
 
@@ -84,7 +78,6 @@ export class HeaderComponent implements OnInit {
 
   noti(){
     let tokenString = this.loginService.GetTokenString();
-    console.log(this.loginService.GetTokenInfo(tokenString)['email']);
   }
 
   GetUserEmail(){
