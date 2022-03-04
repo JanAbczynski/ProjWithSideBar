@@ -12,8 +12,7 @@ export class ShootingRange {
 
 
 
-    constructor(
-    ){
-
+    constructor(Name: string){
+        this.Name = Name;
     }
 }

@@ -4,11 +4,12 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
 import { HelloComponent } from './components/hello/hello.component'
 import { ProfileSecurityComponent } from './components/profile/profile-security/profile-security.component'
 import { ProfileDataComponent } from './components/profile/profile-data/profile-data.component'
-import { CompetitionMenuComponent } from './components/competition-menu/competition-menu.component';
 import { TPsideBarComponent } from './components/TurboPuszka/tpside-bar/tpside-bar.component';
 import { ShootingRangeComponent } from './components/shootingRange/shooting-range/shooting-range.component';
 import { ShootingRangeListComponent } from './components/shootingRange/shooting-range-list/shooting-range-list.component';
 import { ShootingRangeEditComponent } from './components/shootingRange/shooting-range-edit/shooting-range-edit.component';
+import { CompetitionMenuComponent } from './components/competition/competition-menu/competition-menu.component';
+import { TargetCreateComponent } from './components/target/target-create/target-create.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/hello' },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'shootingRange/create', component: ShootingRangeComponent},
   { path: 'shootingRange/list', component: ShootingRangeListComponent},
   { path: 'shootingRange/edit/:id', component: ShootingRangeEditComponent},
+  { path: 'targets/create', component: TargetCreateComponent},
   { path: 'turboPuszka/sideBarMenu', component: TPsideBarComponent}
 
 ];

@@ -1,0 +1,142 @@
+
+
+<mat-tab-group>
+    
+    <mat-tab label="Czas i miejsce" >
+
+
+
+        <button (click)="Test()">TEST</button>
+
+
+        <form #userForm="ngForm" (ngSubmit)="CreateCompetition()" >     
+            <div>
+
+                <div fxFlex="45" fxLayoutAlign="end"> 
+                    <mat-form-field appearance="fill" style="width:400px !important">
+                        <mat-label>Data zawodów</mat-label>
+                        <input matInput [matDatepicker]="picker"  [(ngModel)]="competition.startDate" name="StartDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                
+                <div fxFlex="45" fxLayoutAlign="end"> 
+                    <mat-form-field appearance="fill" style="width:400px !important">
+                    <mat-label>Nazwa zawodów</mat-label>
+                    <input matInput required ngModel name="place" [(ngModel)]="competition.name"><br>
+                    </mat-form-field><br>
+                </div>
+            </div>
+
+
+            <div *ngIf="competitionModel.shootingRanges != null ">
+                Wybrane strzelnice:
+
+                <div style="max-width: 90%;">
+                    <mat-chip-list aria-label="Fish selection">
+                        <mat-chip *ngFor="let shootingRange of competitionModel.shootingRanges"  (removed)="remove(shootingRange)"> {{shootingRange.Name}} 
+                            <button matChipRemove>
+                                <mat-icon>cancel</mat-icon>
+                              </button>
+                        </mat-chip>
+                      </mat-chip-list>
+        
+                </div>
+
+
+                <!-- <div *ngFor="let shootingRange of competitionModel.shootingRanges; let i = index" >
+                    {{shootingRange.Name}} <span *ngIf="shootingRange.Address != null">- {{shootingRange.Address.City}}</span>
+                </div> -->
+            </div>
+
+            <button color="primary" mat-button (click)="OpenDialog()">Dodaj strzelnice</button>
+
+
+
+            <div>
+                <div fxFlex="90" fxLayoutAlign="end"> 
+                    <button color="primary" mat-button type="submit">Aktualizuj dane osobowe</button>
+                </div>
+            </div>
+        </form>
+
+
+
+
+
+
+    </mat-tab>    
+    <mat-tab label="Konkurencje" >
+
+
+
+        <form #userForm="ngForm" (ngSubmit)="CreateCompetition()" >     
+
+
+            <div *ngIf ="competitionModel.Runs != undefined">
+                <div *ngFor = "let run of competitionModel.Runs; let i = index"> 
+                    
+                    
+                    <div>     
+                        <div fxFlex="45" fxLayoutAlign="end"> 
+                            <mat-form-field appearance="fill" style="width:400px !important">
+                            <mat-label>Nazwa konkurencji</mat-label>
+                            <input matInput required ngModel name="place" [(ngModel)]="competitionModel.Runs[i].Name"><br>
+                            </mat-form-field><br>
+                        </div>
+
+
+                    </div>
+
+                    Wybrana oś
+                    <div style="max-width: 90%;">
+                        <mat-chip-list aria-label="Fish selection">
+                            <mat-chip *ngFor="let OneRange of run.OneRange; let j = index"  (removed)="removeOneRange(OneRange, run.Id)"> 
+                                
+                                <span *ngIf="(competitionModel.shootingRanges?.length || 0)> 1">
+                                    {{OneRange.ShootingRangeName}}: {{OneRange.Description}} - {{OneRange.Distance}}
+                                </span>
+                                <span *ngIf="(competitionModel.shootingRanges?.length || 0) <= 1">
+                                    {{OneRange.Description}} - {{OneRange.Distance}}
+                                </span>
+                                 
+                                <button matChipRemove>
+                                    <mat-icon>cancel</mat-icon>
+                                  </button>
+                            </mat-chip>
+                          </mat-chip-list>
+            
+                    </div>
+
+
+                    <button color="primary" mat-button (click)="SelectOneRange(run.Id)">Wybierz oś</button>
+                </div>
+            </div>
+
+
+            <button color="primary" mat-button (click)="AddRun()">Dodaj konkurencję</button>
+
+
+
+            <div>
+                <div fxFlex="90" fxLayoutAlign="end"> 
+                    <button color="primary" mat-button type="submit">Aktualizuj dane osobowe</button>
+                </div>
+            </div>
+        </form>
+
+
+
+
+
+    </mat-tab>
+
+    <mat-tab label="Ludzie" >
+
+            
+
+
+    </mat-tab>  
+
+</mat-tab-group>

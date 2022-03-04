@@ -31,9 +31,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTableModule } from '@angular/material/table'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatChipsModule } from '@angular/material/chips'
 
 import { HeaderComponent } from './components/header/header.component'
-import { CompetitionMenuComponent } from './components/competition-menu/competition-menu.component';
 import { TPsideBarComponent } from './components/TurboPuszka/tpside-bar/tpside-bar.component';
 import { YesOrNoComponent } from './components/yes-or-no/yes-or-no.component';
 import { ShootingRangeComponent } from './components/shootingRange/shooting-range/shooting-range.component';
@@ -42,6 +42,16 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ShootingRangeFormComponent } from './components/shootingRange/shooting-range-form/shooting-range-form.component';
 import { ShootingRangeEditComponent } from './components/shootingRange/shooting-range-edit/shooting-range-edit.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { Ng2OrderModule } from 'ng2-order-pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { SortPipe } from './share/pipes/sort.pipe';
+import { CompetitionMenuComponent } from './components/competition/competition-menu/competition-menu.component';
+import { ShootingRangeDialogComponent } from './components/shooting-range-dialog/shooting-range-dialog.component';
+import { SelectOneRangeDialogComponent } from './components/competition/select-one-range-dialog/select-one-range-dialog.component';
+import { TargetCreateComponent } from './components/target/target-create/target-create.component';
+
+
 
 registerLocaleData(pl);
 
@@ -61,6 +71,10 @@ registerLocaleData(pl);
     ShootingRangeListComponent,
     ShootingRangeFormComponent,
     ShootingRangeEditComponent,
+    SortPipe,
+    ShootingRangeDialogComponent,
+    SelectOneRangeDialogComponent,
+    TargetCreateComponent,
     ArrayOfComponents
   ],
   entryComponents: [LoginDialogComponent],
@@ -85,6 +99,10 @@ registerLocaleData(pl);
     MatSnackBarModule,
     MatSortModule,
     MatPaginatorModule,
+    MatChipsModule,
+    Ng2SearchPipeModule,
+    Ng2OrderModule,
+    NgxPaginationModule,
     ToastrModule.forRoot()
   ],
   providers: [{ provide: NZ_I18N, useValue: pl_PL }, HeaderComponent],

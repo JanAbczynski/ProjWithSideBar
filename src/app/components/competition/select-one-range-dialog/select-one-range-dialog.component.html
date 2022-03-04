@@ -1,0 +1,52 @@
+<mat-form-field>
+    <input (keyup)="applyFIlter(in.value)" #in  matInput  placeholder="Wyszukaj">
+</mat-form-field>
+
+<div  style="width: 800px;">
+    
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" 
+         matSortDirection="desc" matSort  style="min-width: 800px;">
+
+    <ng-container matColumnDef="ShootingRangeName">
+    <th mat-header-cell *matHeaderCellDef  mat-sort-header> 
+        ShootingRangeName    
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.ShootingRangeName}} </td>
+    </ng-container>  
+
+    <ng-container matColumnDef="Description">
+    <th mat-header-cell *matHeaderCellDef  mat-sort-header> 
+        Description
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.Description}} </td>
+    </ng-container>  
+
+    <ng-container matColumnDef="Distance">
+    <th mat-header-cell *matHeaderCellDef  mat-sort-header> 
+        Distance
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.Distance}} </td>
+    </ng-container>  
+
+    <ng-container matColumnDef="NoOfTargets">
+    <th mat-header-cell *matHeaderCellDef  mat-sort-header> 
+        NoOfTargets
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.NoOfTargets}} </td>
+    </ng-container>  
+
+    <ng-container matColumnDef="Button">
+      <th mat-header-cell *matHeaderCellDef>  </th>
+      <td mat-cell *matCellDef="let element"> 
+        <button mat-button color="primary" (click)="Select(element.Id)"  [disabled]="element.Disabled" >Wybierz</button>  
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
+  
+</div>

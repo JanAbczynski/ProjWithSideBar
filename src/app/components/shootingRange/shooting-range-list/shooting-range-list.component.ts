@@ -7,6 +7,8 @@ import { CommonServiceService } from '../../../services/common-service.service';
 import { Router } from '@angular/router';
 import { ShootingRange } from '../../../models/shootingRange';
 import { TableEngine } from '../../../models/tableEngine';
+import { Filter } from '../../../models/Filter';
+import { TableParams } from '../../../models/TableParams';
 
 
 
@@ -20,7 +22,11 @@ let tableData: ShootingRange[] = [];
 export class ShootingRangeListComponent implements OnInit, AfterViewInit {
 
   shootingRanges: ShootingRange[] = [];
+  
+  tableParams: TableParams = {};
+
   displayedColumns: string[] = [];
+  
   tableEngine: TableEngine[] = [
     {Description: 'Name', Sort: 0},
     {Description: 'ZipCode', Sort: 0},
@@ -44,15 +50,34 @@ export class ShootingRangeListComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
 
     this.HandleTable();
-    this.GetShootingRanges();
+    this.GetShootingRanges(this.tableParams);
   }
 
   ngAfterViewInit(): void {
 
     this.dataSource.sort = this.sort;
-    console.log('this.dataSource.sort');
-    console.log(this.dataSource.sort);
     this.dataSource.paginator = this.paginator;
+  }
+
+  // Search(){
+  //   if(this.Name == ""){
+  //     this.ngOnInit();
+  //   }else{
+  //     this.shootingRanges = this.shootingRanges.filter(res => {
+  //       res.Name = res.Name as string;
+
+  //       return res.Name.toLocaleLowerCase().match(this.Name.toLocaleLowerCase());
+  //     })
+  //   }
+  // }
+
+  key = 'Id';
+  reverse: boolean = false;
+
+  Sort(keyFN: string){
+    this.key = keyFN;
+    this.shootingRanges.sort
+    // this.reverse = !this.reverse;
   }
 
   HandleTable(){
@@ -73,8 +98,8 @@ export class ShootingRangeListComponent implements OnInit, AfterViewInit {
   }
 
 
-  GetShootingRanges(){
-    this.shootingRngeService.GetShootingRanges()
+  GetShootingRanges(filter : TableParams){
+    this.shootingRngeService.GetShootingRanges(filter)
     .subscribe({
       next: ((value: any) => {
         this.shootingRanges = value;
@@ -85,6 +110,11 @@ export class ShootingRangeListComponent implements OnInit, AfterViewInit {
       })
       }
     )
+  }
+
+  customFIlter2(filterValue: any, fieldName: string){
+    let filter: Filter = {Name: fieldName, Value: filterValue};
+
 
   }
 
@@ -114,13 +144,11 @@ export class ShootingRangeListComponent implements OnInit, AfterViewInit {
       }   
     }
 
-
     for(let i = 0; i < this.tableEngine.length; i ++){
       if(this.tableEngine[i].Description == field){
         sortDirection = this.tableEngine[i].Sort as number;
       }   
     }
-
 
     if(tableData != undefined){
 
@@ -132,9 +160,29 @@ export class ShootingRangeListComponent implements OnInit, AfterViewInit {
         return 0;
       });
 
-
         this.dataSource.data = sorted
     }
+  }
+
+  
+  customFIlter(filterValue: any, fieldName: string){
+    let data =[];
+
+    let field = fieldName as keyof typeof tableData[0];
+
+    for(let i = 0; i < tableData.length; i++){
+      let fieldData = tableData[i][field];
+
+      if(typeof fieldData === 'string'){
+        let stringFieldData = fieldData as string;
+        if(stringFieldData?.toLowerCase().includes(filterValue.toLowerCase())){
+          data.push(tableData[i]);
+          console.log(data);
+        }
+      }
+    }
+    this.dataSource.data = data;
+    console.log(this.dataSource);
   }
 
 
@@ -161,23 +209,11 @@ export class ShootingRangeListComponent implements OnInit, AfterViewInit {
   }
 
 
-  customFIlter(filterValue: any){
-    let data =[];
-
-    for(let i = 0; i < tableData.length; i++){
-      let x = tableData[i].Name?.toLowerCase();
-      if(tableData[i].Name?.toLowerCase().includes(filterValue.toLowerCase())){
-        data.push(tableData[i]);
-        console.log(data);
-      }
-    }
-
-    this.dataSource.data = data;
-  }
 
 
   applyFIlter(filterValue: any){
-    // console.log(filterValue)
+
     this.dataSource.filter = filterValue.trim().toLowerCase();
+
   }
 }
