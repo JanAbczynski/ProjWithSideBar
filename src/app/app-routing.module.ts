@@ -10,6 +10,8 @@ import { ShootingRangeListComponent } from './components/shootingRange/shooting-
 import { ShootingRangeEditComponent } from './components/shootingRange/shooting-range-edit/shooting-range-edit.component';
 import { CompetitionMenuComponent } from './components/competition/competition-menu/competition-menu.component';
 import { TargetCreateComponent } from './components/target/target-create/target-create.component';
+import { TargetListComponent } from './components/target/target-list/target-list.component';
+import { TargetEditComponent } from './components/target/target-edit/target-edit.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/hello' },
@@ -23,6 +25,8 @@ const routes: Routes = [
   { path: 'shootingRange/list', component: ShootingRangeListComponent},
   { path: 'shootingRange/edit/:id', component: ShootingRangeEditComponent},
   { path: 'targets/create', component: TargetCreateComponent},
+  { path: 'targets/list', component: TargetListComponent},
+  { path: 'targets/edit/:id', component: TargetCreateComponent},
   { path: 'turboPuszka/sideBarMenu', component: TPsideBarComponent}
 
 ];

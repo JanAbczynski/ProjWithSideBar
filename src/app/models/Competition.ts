@@ -3,9 +3,10 @@ import { ShootingRange } from "./shootingRange";
 
 export class Competition {
 
-    public startDate?: string;
+    public Id? :string;
+    public StartDate?: string;
     public place?: string;
-    public name?: string;
+    public Name?: string;
     public Schortcut?: string;
     // public shootingRange?: ShootingRange;
     public shootingRanges?: ShootingRange[];

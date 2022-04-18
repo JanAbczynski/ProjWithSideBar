@@ -32,6 +32,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatTableModule } from '@angular/material/table'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatChipsModule } from '@angular/material/chips'
+import { MatCheckboxModule } from '@angular/material/checkbox'
 
 import { HeaderComponent } from './components/header/header.component'
 import { TPsideBarComponent } from './components/TurboPuszka/tpside-bar/tpside-bar.component';
@@ -50,7 +51,9 @@ import { CompetitionMenuComponent } from './components/competition/competition-m
 import { ShootingRangeDialogComponent } from './components/shooting-range-dialog/shooting-range-dialog.component';
 import { SelectOneRangeDialogComponent } from './components/competition/select-one-range-dialog/select-one-range-dialog.component';
 import { TargetCreateComponent } from './components/target/target-create/target-create.component';
-
+import { AngularFileUploaderModule } from "angular-file-uploader";
+import { TargetListComponent } from './components/target/target-list/target-list.component';
+import { TargetEditComponent } from './components/target/target-edit/target-edit.component';
 
 
 registerLocaleData(pl);
@@ -75,6 +78,8 @@ registerLocaleData(pl);
     ShootingRangeDialogComponent,
     SelectOneRangeDialogComponent,
     TargetCreateComponent,
+    TargetListComponent,
+    TargetEditComponent,
     ArrayOfComponents
   ],
   entryComponents: [LoginDialogComponent],
@@ -100,9 +105,12 @@ registerLocaleData(pl);
     MatSortModule,
     MatPaginatorModule,
     MatChipsModule,
+    MatCheckboxModule,
     Ng2SearchPipeModule,
     Ng2OrderModule,
     NgxPaginationModule,
+    AngularFileUploaderModule,
+    
     ToastrModule.forRoot()
   ],
   providers: [{ provide: NZ_I18N, useValue: pl_PL }, HeaderComponent],

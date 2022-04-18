@@ -1,8 +1,8 @@
 
 
-<form #userForm="ngForm" (ngSubmit)="OnSubmitCreateSR()">   
+<form #userForm="ngForm" (ngSubmit)="OnSubmitEditTarget()">   
 
-    <div>
+    <!-- <div>
         <div fxFlex="45" fxLayoutAlign="end"> 
 
             <mat-form-field appearance="fill" style="width:400px !important">
@@ -95,21 +95,15 @@
         </span> 
         <span fxFlex="20">
             
-    <button color="primary" mat-button type="button" (click)="AddPoints()">Dodaj punkt</button>
+    <button color="primary" mat-button type="button" (click)="AddPoints()">Dodaj rozmiar</button>
     </span>
         </div>
-</div>
+</div>-->
 
-
-<button color="primary" mat-button type="submit" (click)="Submit()" *ngIf="!edit">Zapisz cel</button>
-<button color="primary" mat-button type="submit" (click)="Submit()" *ngIf="edit">Aktualizuj cel</button>
-<button mat-button type="button" (click)="ReturnToList()">wróć do listy</button>
-<button color="warn" mat-button type="button" (click)="AskForDeleteOneTarget()" *ngIf="edit">Usuń cel</button>
-<button color="warn" mat-button type="button" (click)="SetActive()" *ngIf="targetModel.IsActive" >Oznacz jako nieaktywny</button>
-<button color="primary" mat-button type="button" (click)="SetActive()" *ngIf="!targetModel.IsActive" >Oznacz jako aktywny</button>
+    <button color="primary" mat-button type="submit" (click)="OnSubmitEditTarget()">Zapisz cel</button> 
 </form>
     
-    <input type="file" class="file-input"
+    <!-- <input type="file" class="file-input"
            (change)="onFileSelected($event)" #fileUpload style="display: none;">
     
            <div class="file-upload">
@@ -119,21 +113,20 @@
              mat-mini-fab color="primary" 
              class="upload-btn" 
              (click)="fileUpload.click()"
-             *ngIf="targetModel.AttachmentFile == undefined || targetModel.AttachmentFile == null">
+             *ngIf="targetModel.File == undefined || targetModel.File == null">
                  <mat-icon>attach_file</mat-icon>
              </button>
 
-             <div *ngIf="!(targetModel.AttachmentFile == undefined || targetModel.AttachmentFile == null)">
-                <button mat-mini-fab color="warn"  (click)="RemoveFile(targetModel.AttachmentFile.Id)"><mat-icon>delete</mat-icon></button>
+             <div *ngIf="!(targetModel.File == undefined || targetModel.File == null)">
+                <button mat-mini-fab color="warn"  (click)="RemoveFile(targetModel.File.Id)"><mat-icon>delete</mat-icon></button>
              </div>
          </div>
                
-         <div *ngIf="targetModel.AttachmentFile != undefined"> 
-            <img src="assets/graph/targets/{{targetModel.AttachmentFile!.FullName}}" alt="target" width="150" height="150"><br>
-            {{targetModel.AttachmentFile!.OriginalName}}
+         <div *ngIf="targetModel.File != undefined"> 
+            <img src="assets/graph/targets/{{targetModel.File.FileUrl}}" alt="target" width="150" height="150"><br>
+            {{targetModel.File.OriginalName}}
         </div>
-       
+        -->
 
-<!-- https://www.youtube.com/watch?v=Xaev43AXN_w -->
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">

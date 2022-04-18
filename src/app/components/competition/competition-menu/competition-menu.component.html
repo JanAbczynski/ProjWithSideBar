@@ -15,7 +15,7 @@
                 <div fxFlex="45" fxLayoutAlign="end"> 
                     <mat-form-field appearance="fill" style="width:400px !important">
                         <mat-label>Data zawodów</mat-label>
-                        <input matInput [matDatepicker]="picker"  [(ngModel)]="competition.startDate" name="StartDate">
+                        <input matInput [matDatepicker]="picker"  [(ngModel)]="competition.StartDate" name="StartDate">
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
                     </mat-form-field>
@@ -24,7 +24,7 @@
                 <div fxFlex="45" fxLayoutAlign="end"> 
                     <mat-form-field appearance="fill" style="width:400px !important">
                     <mat-label>Nazwa zawodów</mat-label>
-                    <input matInput required ngModel name="place" [(ngModel)]="competition.name"><br>
+                    <input matInput required ngModel name="place" [(ngModel)]="competition.Name"><br>
                     </mat-form-field><br>
                 </div>
             </div>
@@ -58,7 +58,9 @@
                 <div fxFlex="90" fxLayoutAlign="end"> 
                     <button color="primary" mat-button type="submit">Aktualizuj dane osobowe</button>
                 </div>
+            
             </div>
+
         </form>
 
 

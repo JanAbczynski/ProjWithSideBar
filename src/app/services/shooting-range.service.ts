@@ -1,15 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.prod';
+import { Competition } from '../models/Competition';
 import { Filter } from '../models/Filter';
 import { ShootingRange } from '../models/shootingRange';
 import { TableParams } from '../models/TableParams';
+import { TargetModel } from '../models/Target/TargetModel';
 import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShootingRangeService {
+
+
   urlShootingRange = environment.apiUrl + "/ShootingRange";
   
   constructor(
@@ -47,5 +51,45 @@ export class ShootingRangeService {
 
   GetOneRangeData(shootingRangesId: string[]) {
     return this.http.post<any>(this.urlShootingRange + "/GetOneRangeData", shootingRangesId , this.loginService.SetOpts());
+  }
+
+  // SendTargetImage(xompetition: FormData) {
+
+  //   return this.http.post<any>(this.urlShootingRange + "/AddTarget", xompetition, this.loginService.SetOpts() );
+  // }
+
+  
+  UploadFile(targetFile: FormData) {
+    return this.http.post<any>(this.urlShootingRange + "/UploadTarget", targetFile, this.loginService.SetOpts() );
+  }
+
+  
+  DeleteTarget(Id: any) {
+    return this.http.get<any>(this.urlShootingRange + "/DeleteTarget?id=" + Id , this.loginService.SetOpts());
+  }
+
+  RemoveTempFile(Id: any) {
+    return this.http.get<any>(this.urlShootingRange + "/RemoveTempFile?id=" + Id , this.loginService.SetOpts());
+  }
+
+  
+  AddTarget(targetModel: TargetModel) {
+    return this.http.post<any>(this.urlShootingRange + "/SubmitTarget", targetModel, this.loginService.SetOpts() );
+  }
+  
+  SetActive(Id: string) {
+    return this.http.get<any>(this.urlShootingRange + "/SetActive?Id=" + Id , this.loginService.SetOpts());
+  }
+
+  EditTarget(targetModel: TargetModel) {
+    return this.http.post<any>(this.urlShootingRange + "/EditTarget", targetModel, this.loginService.SetOpts() );
+  }
+  
+  GetTargets(tableParams : TableParams) {
+    return this.http.post<any>(this.urlShootingRange + "/GetTargets", tableParams , this.loginService.SetOpts());
+  }
+
+  GetTarget(Id: string) {
+    return this.http.get<any>(this.urlShootingRange + "/GetTarget?Id=" + Id , this.loginService.SetOpts());
   }
 }
