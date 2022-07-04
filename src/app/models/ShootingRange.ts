@@ -9,6 +9,8 @@ export class ShootingRange {
     public Description?: string;
     public Address?: customAddress;
     public OneRange?: OneRange[];
+    public IsPublic?: boolean;
+    public IsEditable?: boolean;
 
 
 

@@ -1,7 +1,7 @@
 
 
 <button (click)=Test()>test</button>
-<button >YesNo</button>
+<button (click)="GenDefaultPermission()">Permission</button>
 
 
 
@@ -75,26 +75,26 @@
         </mat-form-field>
 
 
-            <mat-form-field appearance="fill" >
-                <mat-label>SubMenu</mat-label>
-                <input matInput required ngModel name="SubMenu" [(ngModel)]="menu.SubMenu"><br>
-            </mat-form-field>  
+        <mat-form-field appearance="fill" >
+            <mat-label>SubMenu</mat-label>
+            <input matInput required ngModel name="SubMenu" [(ngModel)]="menu.SubMenu"><br>
+        </mat-form-field>  
 
 
-            <mat-form-field appearance="fill" >
-                <mat-label>RouterLink</mat-label>
-                <input matInput required ngModel name="RouterLink" [(ngModel)]="menu.RouterLink"><br>
-            </mat-form-field>
+        <mat-form-field appearance="fill" >
+            <mat-label>RouterLink</mat-label>
+            <input matInput required ngModel name="RouterLink" [(ngModel)]="menu.RouterLink"><br>
+        </mat-form-field>
 
 
-            <mat-form-field appearance="fill">
-                <mat-label>Rola</mat-label>
-                <mat-select name="UserRole" [(ngModel)]="menu.UserRole" required>
-                    <div *ngFor="let role of userRole">
-                        <mat-option [value]="role.Id">{{role.Value}}</mat-option>
-                    </div> 
-                </mat-select>
-            </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Rola</mat-label>
+            <mat-select name="UserRole" [(ngModel)]="menu.UserRole" required>
+                <div *ngFor="let role of userRole">
+                    <mat-option [value]="role.Id">{{role.Value}}</mat-option>
+                </div> 
+            </mat-select>
+        </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>Typ</mat-label>

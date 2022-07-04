@@ -3,7 +3,12 @@
 <form #userForm="ngForm" (ngSubmit)="OnSubmitCreateSR()">   
 
     <div>
-        <div fxFlex="45" fxLayoutAlign="end"> 
+        <div fxFlex="14" >
+            
+            <button  color="primary"  mat-button type="button" (click)="SetActive()" *ngIf="targetModel.IsActive && !targetModel.IsPublic" >Tarcza aktywowana</button>
+            <button color="warn" mat-button type="button" (click)="SetActive()" *ngIf="!targetModel.IsActive && !targetModel.IsPublic" >Tarcza dezaktywowana</button>
+        </div>
+        <div fxFlex="45" fxLayoutAlign="start"> 
 
             <mat-form-field appearance="fill" style="width:400px !important">
                 <mat-label>Nazwa</mat-label>
@@ -100,13 +105,11 @@
         </div>
 </div>
 
-
 <button color="primary" mat-button type="submit" (click)="Submit()" *ngIf="!edit">Zapisz cel</button>
-<button color="primary" mat-button type="submit" (click)="Submit()" *ngIf="edit">Aktualizuj cel</button>
+<button color="primary" mat-button type="submit" (click)="Submit()" *ngIf="edit && !targetModel.IsPublic">Aktualizuj cel</button>
 <button mat-button type="button" (click)="ReturnToList()">wróć do listy</button>
-<button color="warn" mat-button type="button" (click)="AskForDeleteOneTarget()" *ngIf="edit">Usuń cel</button>
-<button color="warn" mat-button type="button" (click)="SetActive()" *ngIf="targetModel.IsActive" >Oznacz jako nieaktywny</button>
-<button color="primary" mat-button type="button" (click)="SetActive()" *ngIf="!targetModel.IsActive" >Oznacz jako aktywny</button>
+<button mat-button type="button" (click)="AskForCopyTarget()" *ngIf="edit">utwórz kopię</button>
+<button color="warn" mat-button type="button" (click)="AskForDeleteOneTarget()" *ngIf="edit && !targetModel.IsPublic">Usuń cel</button>
 </form>
     
     <input type="file" class="file-input"

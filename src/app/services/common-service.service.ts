@@ -3,8 +3,10 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../environments/environment.prod';
+import { InputDialogComponent } from '../components/input-dialog/input-dialog.component';
 import { YesOrNoComponent } from '../components/yes-or-no/yes-or-no.component';
 import { EnumModel } from '../models/EnumModel';
+import { FullPermission } from '../models/FullPermission';
 import { LoginService } from './login.service';
 
 
@@ -88,27 +90,27 @@ export class CommonServiceService {
   }
 
 
-  OpenYesNo(message: string, Id: any){
+  OpenYesNo(message: string, Id: any, yes: any = "Tak", no: any = "Nie", alternate_1_Name:any = null){
     let dialogBox = this.dialog.open(YesOrNoComponent);
     dialogBox.componentInstance.message =  message;
     dialogBox.componentInstance.exeternalID = Id;
+    
+    dialogBox.componentInstance.yes = yes;
+
+    dialogBox.componentInstance.no = no;
+
+    dialogBox.componentInstance.alternate_1_Name = alternate_1_Name;
 
     return dialogBox.afterClosed();
-
-    // dialogBox.afterClosed().subscribe(result =>{
-
-    //   if(result.answer){
-    //     return true;
-    //   }else{
-    //     return false;
-    //   }
-    // })
-
-    // return false;
-
-
   }
 
+  OpenInputDialog(message: string, buttonSubmit: string = "Dodaj", buttonCancel: string = "Anuluj"){
+    let dialogInput = this.dialog.open(InputDialogComponent);
+    dialogInput.componentInstance.message = message;
+    dialogInput.componentInstance.buttonSubmit = buttonSubmit;
+    dialogInput.componentInstance.buttonCancel = buttonCancel;
+    return dialogInput.afterClosed();
+  }
 
 
   GetGuns() {
@@ -124,9 +126,15 @@ export class CommonServiceService {
     return this.http.get<EnumModel[]>(this.urlTurboPuszka + "/GetEnums?EnumType=" + EnumType, this.loginService.SetOpts());
   }
 
+  GetPermissions(){
+    return this.http.get<EnumModel[]>(this.urlUser + "/GetPermissions" , this.loginService.SetOpts());
+  }
+
+  GetPermissionDetail(permissionId: any) {
+    return this.http.get<EnumModel[]>(this.urlUser + "/GetPermissionDetail?permissionId=" + permissionId, this.loginService.SetOpts());
+  }
 
   UpdateSubMenu(updateValues: any) {
-
     return this.http.post<EnumModel[]>(this.urlTurboPuszka + "/UpdateMenu", updateValues, this.loginService.SetOpts());
   }
  
@@ -134,6 +142,13 @@ export class CommonServiceService {
     return this.http.get<EnumModel[]>(this.urlTurboPuszka + "/DeleteMenu?menuPartId=" + deleteId, this.loginService.SetOpts());
   }
 
+  GenDefaultPermission() {
+    return this.http.get<EnumModel[]>(this.urlTurboPuszka + "/GenDefaultPermission", this.loginService.SetOpts());
+  }
+
+  AddPermission(newPermission: FullPermission) {
+    return this.http.post<EnumModel[]>(this.urlUser + "/AddPermission", newPermission, this.loginService.SetOpts());
+  }
 
 
 

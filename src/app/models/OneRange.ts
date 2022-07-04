@@ -6,6 +6,7 @@ export class OneRange {
     public Distance?: Number;
     public Guns?: string;
     public NoOfTargets?: number;
+    public GunsFriendly?: string;
 
 
 

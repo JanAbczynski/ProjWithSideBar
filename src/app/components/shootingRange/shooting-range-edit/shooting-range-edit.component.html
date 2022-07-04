@@ -1,3 +1,5 @@
+
+
 <form #userForm="ngForm" (ngSubmit)="OnSubmitEdit()" *ngIf="shootingRangeModel.Address != null">     
     <div>
         <div fxFlex="45" fxLayoutAlign="end"> 
@@ -79,7 +81,7 @@
             <mat-divider></mat-divider>
             <div>
                 Oś {{i + 1}}.
-                <button mat-mini-fab color="warn" (click)=AskForDeleteOneRange(i) aria-label="Delete oneRange">
+                <button mat-mini-fab color="warn" (click)=AskForDeleteOneRange(i) aria-label="Delete oneRange" *ngIf="!shootingRangeModel.IsEditable">
                     <mat-icon>delete</mat-icon>
                   </button>
             </div>
@@ -132,14 +134,14 @@
 
     </div>
 
-    <button color="primary" mat-button type="button" (click)="AddOneRange()">Dodaj oś</button>
+    <button color="primary" mat-button type="button" (click)="AddOneRange()" *ngIf="!shootingRangeModel.IsEditable">Dodaj oś</button>
 
 
     <div>
         <div fxFlex="90" fxLayoutAlign="end"> 
 
-            <button color="warn" mat-button type="submit" [disabled]="userForm.form.invalid">Anuluj</button><br>
-            <button color="primary" mat-button type="submit" [disabled]="userForm.form.invalid">Aktualizuj strzelnice</button>
+            <button color="warn" mat-button type="submit" [disabled]="userForm.form.invalid" *ngIf="!shootingRangeModel.IsEditable">Anuluj</button><br>
+            <button color="primary" mat-button type="submit" [disabled]="userForm.form.invalid" *ngIf="!shootingRangeModel.IsEditable">Aktualizuj strzelnice</button>
         </div>
 
     </div>

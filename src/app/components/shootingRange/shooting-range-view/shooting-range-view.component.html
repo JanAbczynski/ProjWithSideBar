@@ -1,0 +1,34 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 gun-table" 
+         matSortDirection="desc" matSort>
+
+         <ng-container matColumnDef="Description">
+            <th mat-header-cell *matHeaderCellDef  mat-header> 
+                Oś
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.Description}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Distance">
+           <th mat-header-cell *matHeaderCellDef  mat-header> 
+               Dystans
+           </th>
+           <td mat-cell *matCellDef="let element"> {{element.Distance}} </td>
+       </ng-container>
+
+       <ng-container matColumnDef="NoOfTargets">
+          <th mat-header-cell *matHeaderCellDef  mat-header> 
+              Ilość stanowisk
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.NoOfTargets}} </td>
+      </ng-container>
+
+        <ng-container matColumnDef="Guns">
+            <th mat-header-cell *matHeaderCellDef  mat-header> 
+                Broń
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.GunsFriendly}} </td>
+        </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

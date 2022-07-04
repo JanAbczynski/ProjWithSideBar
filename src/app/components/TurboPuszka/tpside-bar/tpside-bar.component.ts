@@ -70,6 +70,7 @@ export class TPsideBarComponent implements OnInit {
   OnSubmit(f: any){
 
     let updateValues = f.value;
+    
 
     this.commonService.UpdateSubMenu(updateValues)
     .subscribe({
@@ -129,4 +130,16 @@ export class TPsideBarComponent implements OnInit {
     )
   }
 
+  GenDefaultPermission(){
+    this.commonService.GenDefaultPermission()
+    .subscribe({
+      next: ((value: any) => {
+        this.menus = value;
+      }),
+      error: ((value: any) => {
+        
+      })
+      }
+    )
+  }
 }

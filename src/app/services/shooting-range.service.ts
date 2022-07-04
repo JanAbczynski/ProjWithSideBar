@@ -67,6 +67,10 @@ export class ShootingRangeService {
   DeleteTarget(Id: any) {
     return this.http.get<any>(this.urlShootingRange + "/DeleteTarget?id=" + Id , this.loginService.SetOpts());
   }
+  
+  CopyTarget(Id: any) {
+    return this.http.get<any>(this.urlShootingRange + "/CopyTarget?id=" + Id , this.loginService.SetOpts());
+  }
 
   RemoveTempFile(Id: any) {
     return this.http.get<any>(this.urlShootingRange + "/RemoveTempFile?id=" + Id , this.loginService.SetOpts());
@@ -91,5 +95,28 @@ export class ShootingRangeService {
 
   GetTarget(Id: string) {
     return this.http.get<any>(this.urlShootingRange + "/GetTarget?Id=" + Id , this.loginService.SetOpts());
+  }
+
+  AddCrewStand(CrewStand: any) {
+    return this.http.post<any>(this.urlShootingRange + "/AddCrewStand", CrewStand , this.loginService.SetOpts());
+  }
+
+  GetCrewStands() {
+    return this.http.get<any>(this.urlShootingRange + "/GetCrewStands", this.loginService.SetOpts());
+  }
+
+  DeleteCrewStand(Id: any) {
+    return this.http.get<any>(this.urlShootingRange + "/DeleteCrewStand?id=" + Id , this.loginService.SetOpts());
+  }
+  
+  EditCrewStand(CrewStand: any) {
+    return this.http.post<any>(this.urlShootingRange + "/EditCrewStand", CrewStand , this.loginService.SetOpts());
+  }
+
+  ForsceAdd(CrewStand: any) {
+    return this.http.post<any>(this.urlShootingRange + "/ForsceAdd", CrewStand , this.loginService.SetOpts());
+  }
+  RestoreCrewStand(CrewStand: any) {
+    return this.http.post<any>(this.urlShootingRange + "/RestoreCrewStand", CrewStand , this.loginService.SetOpts());
   }
 }

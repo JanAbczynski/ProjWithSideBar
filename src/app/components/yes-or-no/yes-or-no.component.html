@@ -1,4 +1,5 @@
 <div>{{message}}</div>
 
-<button color="warn" mat-button (click)="Yes()">Tak</button>
-<button color="primary" mat-button (click)="No()">Nie</button>
+<button color="warn" mat-button (click)="Yes()">{{yes}}</button>
+<button mat-button (click)="Alternate_1()" *ngIf="alternate_1_Name != null">{{alternate_1_Name}}</button>
+<button color="primary" mat-button (click)="No()">{{no}}</button>

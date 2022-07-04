@@ -23,6 +23,7 @@ export class TargetCreateComponent implements OnInit {
       url:"https://example-file-upload-api"
     }
 };
+
   constructor(
     private shootingRangeService: ShootingRangeService,
     private commonService: CommonServiceService,
@@ -96,6 +97,7 @@ export class TargetCreateComponent implements OnInit {
         this.targetModel.Size = value.Size;
         this.targetModel.AllowToChange = value.AllowToChange;
         this.targetModel.IsActive = value.IsActive;
+        this.targetModel.IsPublic = value.IsPublic;
         if(value.AttachmentFile != undefined){
           this.targetModel!.AttachmentFile = {}
           this.targetModel.AttachmentFile! = value.AttachmentFile;
@@ -122,6 +124,31 @@ export class TargetCreateComponent implements OnInit {
     }
   }
 
+
+  AskForCopyTarget(){
+    this.commonService.OpenYesNo("Czy chcesz utworzyć kopię tarczy?", null)
+    .subscribe(
+      result =>{
+          if(result.answer){
+            this.CopyTarget();
+          }
+        }
+    )
+  }
+
+  CopyTarget(){
+    this.shootingRangeService.CopyTarget(this.targetModel.Id)
+    .subscribe({
+      next: ((value: any) => {
+        this.commonService.ShowSuccess(value, "");
+        this.router.navigate(['/targets/list/']);
+      }),
+      error: ((value: any) => {
+        this.commonService.ShowError(value.error, "");
+      })
+      }
+    )
+  }
 
 
 
@@ -406,8 +433,11 @@ export class TargetCreateComponent implements OnInit {
         this.commonService.ShowInfo("Usunięto plik", "")
       }),
       error: ((value: any) => {
-        this.targetModel.AttachmentFile = undefined;
-        this.commonService.ShowError(value.error, "")
+        if(value.status != 409){
+          this.targetModel.AttachmentFile = undefined;
+        }
+        
+        this.commonService.ShowError(value.error.message_2, value.error.message)
       })
       }
     )

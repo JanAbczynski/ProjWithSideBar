@@ -1,3 +1,5 @@
+import { FullPermission } from "./FullPermission";
+
 export class User {
 
     public Email?: string;
@@ -17,6 +19,8 @@ export class User {
     public Surname?: string;
     public BirthDate?: Date;
     public Gender?: string;
+
+    public Permissions?: FullPermission[];
 
 
     constructor(

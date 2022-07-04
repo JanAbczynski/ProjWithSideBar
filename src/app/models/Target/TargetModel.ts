@@ -19,6 +19,7 @@ export class TargetModel {
     public AttachmentFile?: WebFile;
     public AllowToChange?: boolean;
     public IsActive?: boolean;
+    public IsPublic?: boolean;
 
     constructor(
 

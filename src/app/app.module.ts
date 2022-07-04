@@ -6,7 +6,7 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { pl_PL } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import pl from '@angular/common/locales/pl';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule, ArrayOfComponents  } from './app-routing.module';
@@ -33,6 +33,7 @@ import { MatTableModule } from '@angular/material/table'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatChipsModule } from '@angular/material/chips'
 import { MatCheckboxModule } from '@angular/material/checkbox'
+import { MatCardModule} from '@angular/material/card'
 
 import { HeaderComponent } from './components/header/header.component'
 import { TPsideBarComponent } from './components/TurboPuszka/tpside-bar/tpside-bar.component';
@@ -43,6 +44,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ShootingRangeFormComponent } from './components/shootingRange/shooting-range-form/shooting-range-form.component';
 import { ShootingRangeEditComponent } from './components/shootingRange/shooting-range-edit/shooting-range-edit.component';
+import { ShootingRangeViewComponent } from './components/shootingRange/shooting-range-view/shooting-range-view.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { Ng2OrderModule } from 'ng2-order-pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -54,6 +56,9 @@ import { TargetCreateComponent } from './components/target/target-create/target-
 import { AngularFileUploaderModule } from "angular-file-uploader";
 import { TargetListComponent } from './components/target/target-list/target-list.component';
 import { TargetEditComponent } from './components/target/target-edit/target-edit.component';
+import { CrewStandComponent } from './components/crew/crew-stand/crew-stand.component';
+import { InputDialogComponent } from './components/input-dialog/input-dialog.component';
+import { PermissionComponent } from './components/profile/permission/permission.component';
 
 
 registerLocaleData(pl);
@@ -74,12 +79,16 @@ registerLocaleData(pl);
     ShootingRangeListComponent,
     ShootingRangeFormComponent,
     ShootingRangeEditComponent,
+    ShootingRangeViewComponent,
     SortPipe,
     ShootingRangeDialogComponent,
     SelectOneRangeDialogComponent,
     TargetCreateComponent,
     TargetListComponent,
     TargetEditComponent,
+    CrewStandComponent,
+    InputDialogComponent,
+    PermissionComponent,
     ArrayOfComponents
   ],
   entryComponents: [LoginDialogComponent],
@@ -106,10 +115,12 @@ registerLocaleData(pl);
     MatPaginatorModule,
     MatChipsModule,
     MatCheckboxModule,
+    MatCardModule,
     Ng2SearchPipeModule,
     Ng2OrderModule,
     NgxPaginationModule,
     AngularFileUploaderModule,
+    ReactiveFormsModule,
     
     ToastrModule.forRoot()
   ],

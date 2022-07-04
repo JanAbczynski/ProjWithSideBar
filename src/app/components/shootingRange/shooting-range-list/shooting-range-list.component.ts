@@ -9,6 +9,8 @@ import { ShootingRange } from '../../../models/shootingRange';
 import { TableEngine } from '../../../models/tableEngine';
 import { Filter } from '../../../models/Filter';
 import { TableParams } from '../../../models/TableParams';
+import { ShootingRangeViewComponent } from '../shooting-range-view/shooting-range-view.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 
@@ -31,8 +33,13 @@ export class ShootingRangeListComponent implements OnInit, AfterViewInit {
     {Description: 'Name', Sort: 0},
     {Description: 'ZipCode', Sort: 0},
     {Description: 'City', Sort: 0},
-    {Description: 'Delete', Sort: 0}
+    {Description: 'OneRanges', Sort: 0},
+    {Description: 'Delete', Sort: 0},
+    {Description: 'Public', Sort: 0}
   ];
+
+  customFilter = {public :  true, private: true};
+
 
   dataSource = new MatTableDataSource(tableData);
   @ViewChild(MatSort) 
@@ -45,7 +52,8 @@ export class ShootingRangeListComponent implements OnInit, AfterViewInit {
   constructor(
     private shootingRngeService: ShootingRangeService,
     private commonService: CommonServiceService,
-    private router: Router) { }
+    private router: Router,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -78,6 +86,22 @@ export class ShootingRangeListComponent implements OnInit, AfterViewInit {
     this.key = keyFN;
     this.shootingRanges.sort
     // this.reverse = !this.reverse;
+  }
+
+  modelChange(){
+    this.dataSource.data = tableData;
+    let tempData = [];
+    for(let i = 0; i < this.dataSource.data.length; i++){
+      if(this.dataSource.data[i].IsPublic && this.customFilter.public){
+        tempData.push(this.dataSource.data[i]);
+      }
+      if(!this.dataSource.data[i].IsPublic && this.customFilter.private){
+        tempData.push(this.dataSource.data[i]);
+      }
+
+    }
+    this.dataSource.data = tempData;
+    this.ngAfterViewInit();
   }
 
   HandleTable(){
@@ -164,7 +188,12 @@ export class ShootingRangeListComponent implements OnInit, AfterViewInit {
     }
   }
 
-  
+  Details(Id: any){
+    let dialogBox = this.dialog.open(ShootingRangeViewComponent);
+    dialogBox.componentInstance.exeternalID = Id;
+  }
+
+
   customFIlter(filterValue: any, fieldName: string){
     let data =[];
 
@@ -202,7 +231,7 @@ export class ShootingRangeListComponent implements OnInit, AfterViewInit {
       error: ((value: any) => {
         console.log(value.error);
         this.commonService.PushStatus(false);
-        this.commonService.ShowError(value.error,'');
+        this.commonService.ShowError(value.error.Message, value.error.Message_2);
       })
       }
     )
@@ -212,8 +241,6 @@ export class ShootingRangeListComponent implements OnInit, AfterViewInit {
 
 
   applyFIlter(filterValue: any){
-
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
   }
 }

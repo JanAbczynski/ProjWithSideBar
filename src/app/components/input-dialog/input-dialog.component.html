@@ -1,0 +1,14 @@
+<div>
+    {{message}}
+</div>
+
+<form #userForm="ngForm" (ngSubmit)="PushAnswer()" (keydown.enter)="PushAnswer()">     
+    <div>
+        <mat-form-field appearance="fill"  [style.width.px]=500>
+            <input matInput required name="stand"  [(ngModel)]="value">
+        </mat-form-field>
+    </div>
+    <button mat-button type="submit" color="primary" >{{buttonSubmit}}</button>
+    <button mat-button type="button" color="warn" (click)="Cancel()">{{buttonCancel}}</button>
+</form>
+

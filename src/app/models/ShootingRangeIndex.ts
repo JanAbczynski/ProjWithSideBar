@@ -10,7 +10,8 @@ export class ShootingRangeIndex {
     public ZipCode?: string;
     public City?: string[];
     public Disabled?: boolean;
-
+    public IsPublic?: boolean;
+    public OneRanges?: string;
 
 
     constructor(){

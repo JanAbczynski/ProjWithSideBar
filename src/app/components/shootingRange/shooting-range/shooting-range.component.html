@@ -2,7 +2,7 @@
 
 <button (click)="Test()">test</button>
 
-
+{{shootingRangeModel.IsEditable}}
 <form #userForm="ngForm" (ngSubmit)="OnSubmitCreateSR()" *ngIf="shootingRangeModel.Address != null">     
     <div>
         <div fxFlex="45" fxLayoutAlign="end"> 

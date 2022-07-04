@@ -41,6 +41,10 @@ export class RegisterLoginService {
     return this.http.post(this.url + "/ChangePassword", user, this.loginService.SetOpts());
   }
 
+  ChangePermissionsData(user: any) {
+    return this.http.post(this.url + "/ChangePermissionsData", user, this.loginService.SetOpts());
+  }
+
   ChangeEmail(user: User) {
     return this.http.post<CustomResponse>(this.url + "/ChangeEmail", user, this.loginService.SetOpts());
   }

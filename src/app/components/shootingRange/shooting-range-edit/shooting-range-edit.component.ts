@@ -21,7 +21,7 @@ export class ShootingRangeEditComponent implements OnInit {
     private shootingRangeService: ShootingRangeService
     ) { }
 
-  shootingRangeModel : ShootingRange = {Address:{}};
+  shootingRangeModel : ShootingRange = {Address:{}, IsEditable : false};
   selectedValue: string = "";
   gunsList: EnumModel[]  = [];
   id : string | any;
@@ -64,7 +64,7 @@ export class ShootingRangeEditComponent implements OnInit {
       }),
       error: ((value: any) => {
         this.commonService.PushStatus(false);
-        this.commonService.ShowError('Błąd podczas edycji strzelnicy','');
+        this.commonService.ShowError(value.error.Message, value.error.Message_2);
       })
       }
     )

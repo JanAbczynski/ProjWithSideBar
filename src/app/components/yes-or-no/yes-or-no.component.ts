@@ -21,16 +21,29 @@ export class YesOrNoComponent implements OnInit {
   message = "...";
   exeternalID = "";
 
+  yes: string = "Tak";
+  yes_Value: any = 1;
+
+  no: string = "Nie";
+  no_Value: any = 0;
+
+  alternate_1_Name: any = null;
+  alternate_1_Value: any = 2;
+
   ngOnInit(): void {
 
   }
 
   Yes(){
-    this.dialogRef.close({ answer: true, externalID: this.exeternalID })
+    this.dialogRef.close({ answer: true, externalID: this.exeternalID, option: this.yes_Value})
+  }
+
+  Alternate_1(){
+    this.dialogRef.close({ answer: true, externalID: this.exeternalID, option: this.alternate_1_Value  })
   }
 
   No(){
-    this.dialogRef.close({ answer: false, externalID: this.exeternalID  })
+    this.dialogRef.close({ answer: false, externalID: this.exeternalID, option: this.no_Value  })
   }
 
   Close(){

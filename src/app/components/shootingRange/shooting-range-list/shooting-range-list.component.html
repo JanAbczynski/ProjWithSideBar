@@ -5,7 +5,29 @@
 <!-- <mat-form-field>
     <input (keyup)="customFIlter2(search.value, 'Name')" #search  matInput  placeholder="Nazwa">
 </mat-form-field> -->
+<section class="example-section">
+  <mat-checkbox
+      name="Target-Special"
+      class="example-margin"
+      color="primary"
+      [(ngModel)]="customFilter.public" 
+      (ngModelChange) = "modelChange()"
+      >
+    pokaż publiczne
+  </mat-checkbox>
+</section>
 
+<section class="example-section">
+  <mat-checkbox
+      name="Target-Special"
+      class="example-margin"
+      color="primary"
+      [(ngModel)]="customFilter.private" 
+      (ngModelChange) = "modelChange()"
+      >
+    pokaż prywatne
+  </mat-checkbox>
+</section>
 
 
 
@@ -15,8 +37,6 @@
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
   
-  
-
     <ng-container matColumnDef="Name">
       <th mat-header-cell *matHeaderCellDef  mat-sort-header> 
         Nazwa
@@ -42,13 +62,32 @@
       </th>
       <td mat-cell *matCellDef="let element"> {{element.City}} </td>
     </ng-container>
+
+    <ng-container  matColumnDef="OneRanges">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> 
+        Osie 
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.OneRanges}} </td>
+    </ng-container>
   
 
     <ng-container matColumnDef="Delete">
       <th mat-header-cell *matHeaderCellDef>  </th>
       <td mat-cell *matCellDef="let element"> 
+        <mat-icon (click)="Details(element.Id)">remove_red_eye</mat-icon>
         <button mat-button color="primary" (click)="Edit(element.Id)">Edytuj</button>  
         <button mat-button color="warn" (click)="AskForDelete(element.Id)">Usuń</button>  
+        <button mat-button color="warn" (click)="AskForDelete(element.Id)">{{element.IsEditable}}</button>  
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Public">
+      <th mat-header-cell *matHeaderCellDef>  </th>
+      <td mat-cell *matCellDef="let element"> 
+        <div *ngIf = "element.IsPublic">
+          <mat-icon>public</mat-icon>
+        </div>
+        
       </td>
     </ng-container>
   

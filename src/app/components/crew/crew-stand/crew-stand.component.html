@@ -1,0 +1,49 @@
+<div>
+
+
+    <form #f="ngForm" (ngSubmit)="OnSubmit(f)" >  
+        
+        <mat-form-field appearance="fill"  [style.width.px]=500>
+            <mat-label>Nazwa</mat-label>
+            <input matInput required ngModel name="Name" [(ngModel)]="stand.Name" ><br>
+        </mat-form-field>
+ 
+        <button type="submit" mat-button color="primary" [disabled]="editIndex != null">Dodaj</button>
+    </form>
+
+
+    <div *ngFor = "let stand of standsList; let i = index"> 
+        <mat-card>
+            <div fxFlex="55" fxLayoutAlign="start" >
+                <div *ngIf="editIndex != i">
+                    {{stand.Name}}
+                </div>
+
+
+
+                <div *ngIf="editIndex == i">
+                    <mat-form-field appearance="fill"  [style.width.px]=500>
+                        <input matInput required ngModel name="stand.Id"  [(ngModel)]="stand.Name">
+                    </mat-form-field>
+
+                    <button type="button" mat-button color="primary" (click) = Edit(stand)>Zapisz</button>
+                    <button type="button" mat-button color="warn" (click) = CancelEdit()>Anuluj</button>
+                </div>
+                
+
+
+
+            </div>
+            <div fxFlex="45" fxLayoutAlign="end"> 
+                <div *ngIf = "editIndex == null">
+                    <mat-icon (click)="StartEdit(i)">edit</mat-icon>
+                    <mat-icon (click)="AskForDelete(stand.Id)">delete</mat-icon>
+                </div>
+
+            </div>
+        </mat-card>
+        
+    </div>
+
+</div>
+

@@ -1,0 +1,21 @@
+.gun-table {
+    width: 100%;
+  }
+  
+  .mat-column-Description {
+    border-right: 1px solid currentColor;
+    padding-right: 24px;
+    text-align: center;
+  }
+
+  .mat-column-Distance {
+    padding-right: 24px;
+    text-align: center;
+  }
+  .mat-column-NoOfTargets {
+    padding-right: 24px;
+    text-align: center;
+  }
+
+
+  
