@@ -13,9 +13,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { TableEngine } from '../../../models/tableEngine';
 import { MatSort } from '@angular/material/sort';
 import { FullPermission } from '../../../models/FullPermission';
-
+import { DocumentComponent } from '../document/document.component';
 
 let tableData: FullPermission[] = [];
+let documentTableData: FullPermission[] = [];
 
 @Component({
   selector: 'app-profile-data',
@@ -44,9 +45,12 @@ export class ProfileDataComponent implements OnInit {
   changeEmailInfo = false;
   
   dataSource = new MatTableDataSource(tableData);
+  documentsSource = new MatTableDataSource(documentTableData);
+
   @ViewChild(MatSort) 
   sort: MatSort | any;
   displayedColumns: string[] = [];
+
   tableEngine: TableEngine[] = [
     {Description: 'Permission', Sort: 0},
     {Description: 'Detail', Sort: 0},
@@ -54,6 +58,16 @@ export class ProfileDataComponent implements OnInit {
     {Description: 'ExpireDate', Sort: 0},
     {Description: 'Buttons', Sort: 0}
   ];
+
+  documentDisplayColumn: string[] = [];
+
+  documentTableEngine: TableEngine[] = [
+    {Description: 'Document', Sort: 0},
+    {Description: 'Details', Sort: 0},
+    {Description: 'Number', Sort: 0},
+    {Description: 'ExpireDate', Sort: 0}
+
+  ]
   
   countries: Country[] = [
     {Value : "1", FullName : "Polska" },
@@ -70,6 +84,10 @@ export class ProfileDataComponent implements OnInit {
       next: ((response: any) => {
         this.userModel = response;
         this.userModel.SecondEmail=this.userModel.Email;
+
+        this.AddPermissionToTable2();
+        this.AddDocumentsToTable();
+      
       }),
       error:((response: any) => {
       })
@@ -87,14 +105,32 @@ export class ProfileDataComponent implements OnInit {
     for(let i = 0; i < this.tableEngine.length; i++){
       this.displayedColumns.push(this.tableEngine[i].Description as string);
     }
+
+    for(let i = 0; i < this.documentTableEngine.length; i++){
+      this.documentDisplayColumn.push(this.documentTableEngine[i].Description as string);
+    }
   }
 
   PushTableData(tableData: any){
-    this.ConvertToFriendly_Table(tableData)
+    // this.ConvertToFriendly_Table(tableData)
     this.dataSource.data = tableData;
   }
 
+  pushDocumentToTable(tableData: any){
+    this.documentsSource.data = tableData;
+  }
+
+  AddDocumentsToTable(){
+    this.ConvertDocumentDetailToFriendly(this.userModel.Documents);
+    this.pushDocumentToTable(this.userModel.Documents)
+  }
+
+  AddPermissionToTable2(){
+    this.PushTableData( this.userModel.Permissions);
+  }
+
   Test(){
+    console.log(this.userModel)
   }
 
   OnSubmitChangePersonalData(){
@@ -120,17 +156,56 @@ export class ProfileDataComponent implements OnInit {
     
   }
 
-  DialogAddPermission(){
+  DialogAddDocuments(document: any = null){
+    let dialogBox = this.dialog.open(DocumentComponent);
+
+  }
+
+
+  DialogAddPermission(permission: any = null){
     let dialogBox = this.dialog.open(PermissionComponent);
+
+    console.log(this.userModel);
+
+    if(permission != {}){
+      dialogBox.componentInstance.oldPermission = permission;
+    }
 
     dialogBox.afterClosed().subscribe(result =>{
       if(result != undefined){
-        
-        this.AddPermitions(result);
-      }
-      
-    })
 
+        if(permission != undefined){
+          this.EditPermission(result);
+        }else{
+          this.AddPermitions(result);
+
+        }
+      }   
+    })
+  }
+
+  TryEditPermission(Id: string){
+   
+    if(this.userModel.Permissions != undefined){
+      for(let i = 0; i < this.userModel.Permissions.length; i++){
+
+        if(this.userModel.Permissions[i].Id == Id){
+          this.DialogAddPermission(this.userModel.Permissions[i])
+        }
+      }
+    }
+  }
+
+  EditPermission(permission: FullPermission){
+    if(this.userModel.Permissions != undefined){
+      for(let i = 0; i < this.userModel.Permissions.length ; i++){
+        if(permission.Id == this.userModel.Permissions[i].Id){
+        this.userModel.Permissions[i] = permission;
+        }
+      }
+
+      this.PushTableData( this.userModel.Permissions);
+    }
   }
 
   AddPermitions(permission: FullPermission){
@@ -138,27 +213,30 @@ export class ProfileDataComponent implements OnInit {
       this.userModel.Permissions = [];
     }
 
+    if(permission.Id == undefined){
+      permission.Id = this.commonService.NewGuid();
+    }
+
     this.userModel.Permissions.push(permission);
     this.PushTableData( this.userModel.Permissions);
   }
 
-  ConvertToFriendly_Table(tableList: any){
+  ConvertDocumentDetailToFriendly(documentList: any){
 
-    for(let i = 0; i < tableList.length; i++){
-      if(tableList[i].UserPermissionDetail != undefined){
-
-        tableList[i].PermissionDetailFriendly = this.ConvertToFriendly(tableList[i].UserPermissionDetail);
-      }
+    for(let i = 0; i < documentList.length; i ++){
+      documentList[i].DetailsFriendly = this.ConvertToFriendly(documentList[i].Details)
     }
+    
+
   }
 
   ConvertToFriendly(list: any){
 
     let friendly = '';
     for(let i = 0; i < list.length; i++){
-      friendly = friendly + list[i]['name'] + ', '
+      friendly = friendly + list[i]['DocumentDetail']['DetailName'] + ', '
     }
-    let stringSize = 20;
+    let stringSize = 25;
     friendly = friendly.substring(0, friendly.length - 2)
 
     if(friendly.length > stringSize){
@@ -174,6 +252,33 @@ export class ProfileDataComponent implements OnInit {
     this.allowTOChangeEmail = !this.allowTOChangeEmail;
     if(this.allowTOChangeEmail){
       this.allowTOChangePass = false;
+    }
+  }
+
+  AskForDeletePermission(Id: string){
+    this.commonService.OpenYesNo("Czy chcesz usunąć uprawnienie?", Id)
+    .subscribe(
+      result =>{
+          if(result.answer){
+            this.DeletePermission(Id);
+          }
+        }
+    )
+  }
+
+  DeletePermission(Id: string){
+
+    if(this.userModel.Permissions != undefined){
+      
+      let tempList = [];
+      for(let i=0; i < this.userModel.Permissions.length; i++){
+        if(this.userModel.Permissions[i].Id != Id){
+          tempList.push(this.userModel.Permissions[i])
+        }
+      }
+
+      this.userModel.Permissions = tempList;
+      this.PushTableData( this.userModel.Permissions);
     }
   }
 
@@ -207,18 +312,29 @@ export class ProfileDataComponent implements OnInit {
   }
 
   SubmitPermissions(){
+    this.commonService.PushStatus(true);
     this.registerService.ChangePermissionsData(this.userModel)
     .subscribe({
-      next : ((response: any) => {this.userModel = response}),
-      error : ((response : any) => {})
+      next : ((response: any) => {
+        this.userModel = response
+        this.commonService.ShowSuccess('','Dane zostały zaktualizowane')
+      }),
+      error : ((response : any) => {
+        this.commonService.ShowError('', 'Nie udało się zaktualizować danych')
+      })
     })
   }
 
   ChangeAddressData(user: User){
     this.registerService.ChangeAddressData(user)
     .subscribe({
-      next : ((response: any) => {this.userModel = response}),
-      error : ((response : any) => {})
+      next : ((response: any) => {
+        this.userModel = response
+        this.commonService.ShowSuccess('', 'Dane zostały zaktualizowane')
+      }),
+      error : ((response : any) => {
+        this.commonService.ShowError('', 'Nie udało się zaktualizować danych')
+      })
     })
     this.commonService.PushStatus(false);
   }

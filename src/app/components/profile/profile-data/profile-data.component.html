@@ -117,7 +117,7 @@
                         <div fxFlex="45" fxLayoutAlign="end"> 
                             <mat-form-field appearance="fill" style="width:400px !important">
                             <mat-label>Nr lokalu</mat-label>
-                            <input matInput ngModel name="LocalNuber" [(ngModel)]="userModel.LocalNuber"><br>
+                            <input matInput ngModel name="LocalNumber" [(ngModel)]="userModel.LocalNumber"><br>
                             </mat-form-field> <br>
                         </div> 
                 </div>
@@ -131,6 +131,50 @@
             </div>
         </mat-tab>   
 
+        <mat-tab label="Dokumenty" >
+
+            <button mat-mini-fab color="primary" aria-label="Add Documents" (click)="DialogAddDocuments()">
+                <mat-icon>add</mat-icon>
+              </button>
+
+            <table mat-table [dataSource]="documentsSource" class="mat-elevation-z8 own-table" 
+            matSortDirection="desc" matSort>
+            
+
+            <ng-container matColumnDef="Number">
+                <th mat-header-cell *matHeaderCellDef  mat-sort-header> 
+                  Numer
+                </th>
+                <td mat-cell *matCellDef="let element"> {{element.DocumentNumber}} </td>
+                </ng-container>   
+
+                <ng-container matColumnDef="ExpireDate">
+                <th mat-header-cell *matHeaderCellDef  mat-sort-header> 
+                  Data
+                </th>
+                <td mat-cell *matCellDef="let element"> {{element.ExpireDate | date:'dd-MM-yyyy'}} </td>
+                </ng-container>   
+
+                <ng-container matColumnDef="Details">
+                <th mat-header-cell *matHeaderCellDef  mat-sort-header> 
+                   Szczegóły
+                </th>
+                <td mat-cell *matCellDef="let element"> {{element.DetailsFriendly}} </td>
+                </ng-container>   
+
+                <ng-container matColumnDef="Document">
+                    <th mat-header-cell *matHeaderCellDef  mat-sort-header> 
+                        Dokument
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Document.DocumentName}} </td>
+                    </ng-container>   
+
+                <tr mat-header-row *matHeaderRowDef="documentDisplayColumn"></tr>
+                <tr mat-row *matRowDef="let row; columns: documentDisplayColumn;"></tr>
+            </table>
+            
+        </mat-tab>   
+
         <mat-tab label="Uprawnienia" >
 
             
@@ -140,19 +184,15 @@
 
 
 
-
-
           <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 own-table" 
           matSortDirection="desc" matSort>
  
-     <!--- Note that these columns can be defined in any order.
-           The actual rendered columns are set as a property on the row definition" -->
-   
+  
            <ng-container matColumnDef="Permission">
             <th mat-header-cell *matHeaderCellDef  mat-sort-header> 
-              Oprawnienie
+              Uprawnienie
             </th>
-            <td mat-cell *matCellDef="let element"> {{element.Permission.Name}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.RawPermission.Name}} </td>
           </ng-container>   
 
           <ng-container matColumnDef="Detail">
@@ -173,21 +213,21 @@
             <th mat-header-cell *matHeaderCellDef  mat-sort-header> 
               Data ważności
             </th>
-            <td mat-cell *matCellDef="let element"> {{element.ExpireDate |  date:'dd/MM/yyyy'}} </td>
+            <!-- <td mat-cell *matCellDef="let element"> {{element.ExpireDate |  date:'dd/MM/yyyy'}} </td> -->
+            <td mat-cell *matCellDef="let element"> {{element.ExpireDate}} </td>
           </ng-container>
 
           <ng-container matColumnDef="Buttons">
             <th mat-header-cell *matHeaderCellDef  mat-sort-header> 
-              XXX
+              
             </th>
-            <td mat-cell *matCellDef="let element"> {{element | json}} </td>
+            <td mat-cell *matCellDef="let element"> 
+                
+                <mat-icon (click)="TryEditPermission(element.Id)">edit</mat-icon>
+                <mat-icon (click)="AskForDeletePermission(element.Id)">delete</mat-icon>
+                </td>
           </ng-container>
 
-
-   
-
-          <!-- <mat-icon (click)="StartEdit(i)">edit</mat-icon>
-          <mat-icon (click)="AskForDelete(stand.Id)">delete</mat-icon> -->
 
      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

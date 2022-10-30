@@ -8,6 +8,7 @@ import { YesOrNoComponent } from '../components/yes-or-no/yes-or-no.component';
 import { EnumModel } from '../models/EnumModel';
 import { FullPermission } from '../models/FullPermission';
 import { LoginService } from './login.service';
+import { UUID } from 'angular2-uuid';
 
 
 @Injectable({
@@ -89,6 +90,11 @@ export class CommonServiceService {
     })
   }
 
+  NewGuid(){
+
+    return UUID.UUID();
+  }
+
 
   OpenYesNo(message: string, Id: any, yes: any = "Tak", no: any = "Nie", alternate_1_Name:any = null){
     let dialogBox = this.dialog.open(YesOrNoComponent);
@@ -124,6 +130,10 @@ export class CommonServiceService {
 
   GetEnums(EnumType: string) {
     return this.http.get<EnumModel[]>(this.urlTurboPuszka + "/GetEnums?EnumType=" + EnumType, this.loginService.SetOpts());
+  }
+
+  GetDocuments(){
+    return this.http.get<EnumModel[]>(this.urlUser + "/GetDocuments" , this.loginService.SetOpts());
   }
 
   GetPermissions(){

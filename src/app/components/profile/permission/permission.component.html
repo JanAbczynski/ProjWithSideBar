@@ -1,3 +1,6 @@
+<button (click)="Test()">TEST</button>
+
+
 <form #userForm="ngForm" (ngSubmit)="OnSubmitPermission()" >    
 
     <div>
@@ -5,7 +8,7 @@
     
             <mat-form-field appearance="fill" style="width:400px !important" required>
                 <mat-label>Uprawnienie</mat-label>
-                <mat-select  [(ngModel)]="newPermission.Permission" (ngModelChange) = "permissionSelect()" name="Permission">
+                <mat-select  [(ngModel)]="newPermission.RawPermission" (ngModelChange) = "permissionSelect()" name="Permission">
                 <mat-option *ngFor="let permission of permissions" [value]="permission" >
                     {{permission.Name}}
                 </mat-option>
@@ -17,25 +20,25 @@
         <div fxFlex="25" fxLayoutAlign="end"> 
         <mat-form-field appearance="fill"  style="width:400px !important">
             <mat-label>Szczegóły</mat-label>
-            <mat-select [formControl]="permissionForm" multiple [disabled]=!newPermission.Permission?.HasEnumDetail  [(ngModel)]="newPermission.UserPermissionDetail" >
+            <mat-select [formControl]="permissionForm" multiple [disabled]=!newPermission.RawPermission?.HasEnumDetail  [(ngModel)]="newPermission.UserPermissionDetail" >
               <mat-select-trigger >
-                {{permissionForm.value ? permissionForm.value[0]?.name : '-'}}
+                {{permissionForm.value ? permissionForm.value[0]?.Name : '-'}}
                 <span *ngIf="permissionForm.value?.length > 1" class="additional-selection">
                   (+{{permissionForm.value.length - 1}} {{permissionForm.value?.length === 2 ? 'other' : 'others'}})
                 </span>
               </mat-select-trigger>
-              <mat-option *ngFor="let topping of permissionsDetail" [value]="topping">{{topping.name}}</mat-option>
+              <mat-option *ngFor="let topping of permissionsDetail" [value]="topping">{{topping.Name}}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
 
         
-        <div fxFlex="25" fxLayoutAlign="end"> 
+        <!-- <div fxFlex="25" fxLayoutAlign="end"> 
             <mat-form-field appearance="fill" style="width:400px !important">
             <mat-label>Numer dokumentu</mat-label>
             <input matInput ngModel name="DocumentNumber" [(ngModel)]="newPermission.DocumentNumber"><br>
             </mat-form-field> <br>
-        </div>
+        </div> -->
 
 
         <div fxFlex="25" fxLayoutAlign="end"> 
@@ -60,5 +63,3 @@
     </div>
 </form> 
 
-
-<button (click)="Test()">test</button>

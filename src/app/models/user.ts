@@ -1,3 +1,4 @@
+import { UserDocument } from "./Documents/UserDocument";
 import { FullPermission } from "./FullPermission";
 
 export class User {
@@ -13,7 +14,7 @@ export class User {
     public ZipCode?: string;
     public Street?: string;
     public BuildingNumber?: string;
-    public LocalNuber?: string;
+    public LocalNumber?: string;
 
     public Name?: string;
     public Surname?: string;
@@ -21,6 +22,8 @@ export class User {
     public Gender?: string;
 
     public Permissions?: FullPermission[];
+
+    public Documents?: UserDocument[];
 
 
     constructor(
